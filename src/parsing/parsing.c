@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frnicola <frnicola@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,32 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "stdlib.h"
-#include "string.h"
+#include "parsing.h"
+#include "../../include/Cubo3D.h"
 
-#define MAX_PATH_LENGTH 5000
+int	valid_map(char *path)
+{
+	int fd;
 
-typedef struct s_pos{
-	int x;
-	int y;
-} t_pos;
-
-typedef struct s_defs{
-	char  north_wall_texture[MAX_PATH_LENGTH];
-	char  south_wall_texture[MAX_PATH_LENGTH];
-	char  west_wall_texture[MAX_PATH_LENGTH];
-	char  east_wall_texture[MAX_PATH_LENGTH];
-	int floor_color[3];
-	int ceiling_color[3];
-
-	char  **map; 
-	t_pos initial_position;
-	char  initial_direction;
-
-} t_defs;
-
-// parsing/parsing.c
-int	valid_map(char *path);
-
-// utils/death.c
-void    death(char *message, int exit_code);
+	if (!check_ext(path))
+		death("Error\nInvalid file extension. Expected .cub", 1);
+	fd = open(path, O_RDONLY);
+	if (fd == -1)
+		death("Error\nFailed to open file", 1);
+	return (1);
+}

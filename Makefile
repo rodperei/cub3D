@@ -16,8 +16,12 @@ DEP_DIR		:= $(BUILD_DIR)/deps
 # ==========================================
 # Source & Object Discovery
 # ==========================================
-SRCS		:= $(SRC_DIR)/XXXX \
-			   $(SRC_DIR)/XXXX \
+SRCS		:= $(SRC_DIR)/parsing/parsing.c \
+			   $(SRC_DIR)/parsing/valid_1.c \
+				\
+			   $(SRC_DIR)/utils/death.c \
+				\
+			   $(SRC_DIR)/main.c
 
 # Transforms src/file.c into build/objs/file.o
 OBJS		:= $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
@@ -38,7 +42,7 @@ $(NAME): $(OBJS)
 	@$(CC) $(OBJS) -o $(NAME)
 	@echo "Build successful!"
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)
 	@mkdir -p $(dir $(DEP_DIR)/$*)
 	@echo "Compiling $<..."
