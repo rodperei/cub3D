@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   read.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frnicola <frnicola@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,17 +10,42 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
+#include "parsing.h"
 
-# include "../../include/Cubo3D.h"
+char    *read_file(char *path)
+{
+    char	buffer[1024];
+    int		fd;
+    int		bytes_read;
+	char	*line;
 
-// valid_1.c
-int	check_ext(char *path);
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
+        return (NULL);
+	line = NULL;
+	bytes_read = read(fd, buffer, sizeof(buffer) - 1);
+	while (bytes_read > 0)
+    {
+        line = append(line, bytes_read, buffer);
+		bytes_read = read(fd, buffer, sizeof(buffer) - 1);
+    }
+	close(fd);
+	return (line);
+}
 
-// read.c
-char	*read_file(char *path);
-void	print_lines(char **lines);
-void	print_line(char *line);
+void	print_line(char *line)
+{
+	printf("%s\n", line);
+}
 
-#endif
+void	print_lines(char **lines)
+{
+	int	i;
+
+	i = 0;
+	while (lines[i])
+	{
+		print_line(lines[i]);
+		i++;
+	}
+}

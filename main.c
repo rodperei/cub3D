@@ -16,7 +16,7 @@ int	main(int argc, char **argv)
 {
 	if (argc != 2)
 	{
-		printf("Usage: %s <map_file>\n", argv[0]);
+		printf("Usage: %s <map_file>.cub\n", argv[0]);
 		return (1);
 	}
 	valid_map(argv[1]);

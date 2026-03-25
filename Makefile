@@ -4,6 +4,7 @@
 NAME		:= cub3D
 CC			:= cc
 CFLAGS		:= -Wall -Wextra -Werror -O3
+LDFLAGS		:= -fsanitize=address
 
 # ==========================================
 # Directory Structure
@@ -19,8 +20,10 @@ DEP_DIR		:= $(BUILD_DIR)/deps
 # ==========================================
 SRCS		:= $(SRC_DIR)/parsing/parsing.c \
 			   $(SRC_DIR)/parsing/valid_1.c \
+			   $(SRC_DIR)/parsing/read.c \
 				\
 			   $(SRC_DIR)/utils/death.c \
+			   $(SRC_DIR)/utils/append.c \
 				\
 			   $(TEST_DIR)/test_parsing.c
 
@@ -40,14 +43,14 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@echo "Linking $(NAME)..."
-	@$(CC) $(OBJS) -o $(NAME)
+	@$(CC) $(OBJS) $(LDFLAGS) -o $(NAME)
 	@echo "Build successful!"
 
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
 	@mkdir -p $(dir $(DEP_DIR)/$*)
 	@echo "Compiling $<..."
-	@$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) $(LDFLAGS) $(CPPFLAGS) -c $< -o $@
 
 # ==========================================
 # Cleanup

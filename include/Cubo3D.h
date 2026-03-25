@@ -48,4 +48,8 @@ int		valid_map(char *path);
 // utils/death.c
 void	death(char *message, int exit_code);
 
+// utils/append.c
+char	*append(char *vec, int size_new, char *buff);
+char	*z_maloc(int size);
+
 #endif
