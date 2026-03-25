@@ -16,7 +16,7 @@ int	valid_map(char *path)
 {
 	int		fd;
 	char	*line;
-	
+
 	if (!check_ext(path))
 		death("Error: Invalid file extension. Expected .cub", 1);
 	fd = open(path, O_RDONLY);

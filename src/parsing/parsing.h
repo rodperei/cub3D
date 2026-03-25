@@ -15,12 +15,12 @@
 
 # include "../../include/Cubo3D.h"
 
-// valid_1.c
-int	check_ext(char *path);
-
 // read.c
 char	*read_file(char *path);
 void	print_lines(char **lines);
 void	print_line(char *line);
+
+// valid_1.c
+int		check_ext(char *path);
 
 #endif

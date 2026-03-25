@@ -12,23 +12,23 @@
 
 #include "parsing.h"
 
-char    *read_file(char *path)
+char	*read_file(char *path)
 {
-    char	buffer[1024];
-    int		fd;
-    int		bytes_read;
+	char	buffer[1024];
+	int		fd;
+	int		bytes_read;
 	char	*line;
 
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
-        return (NULL);
+		return (NULL);
 	line = NULL;
 	bytes_read = read(fd, buffer, sizeof(buffer) - 1);
 	while (bytes_read > 0)
-    {
-        line = append(line, bytes_read, buffer);
+	{
+		line = append(line, bytes_read, buffer);
 		bytes_read = read(fd, buffer, sizeof(buffer) - 1);
-    }
+	}
 	close(fd);
 	return (line);
 }
