@@ -15,12 +15,12 @@
 
 int	valid_map(char *path)
 {
-	int fd;
+	int	fd;
 
 	if (!check_ext(path))
-		death("Error\nInvalid file extension. Expected .cub", 1);
+		death("Error: Invalid file extension. Expected .cub", 1);
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
-		death("Error\nFailed to open file", 1);
+		death("Error: Failed to open file", 1);
 	return (1);
 }

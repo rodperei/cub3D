@@ -16,6 +16,6 @@
 # include "../../include/Cubo3D.h"
 
 // valid_1.c
-int check_ext(char *path);
+int	check_ext(char *path);
 
 #endif

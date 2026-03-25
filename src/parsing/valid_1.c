@@ -12,7 +12,7 @@
 
 #include "parsing.h"
 
-int check_ext(char *path)
+int	check_ext(char *path)
 {
 	char	*ext;
 	int		aux;

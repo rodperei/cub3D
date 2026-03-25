@@ -12,7 +12,7 @@
 
 #include "../../include/Cubo3D.h"
 
-void    death(char *message, int exit_code)
+void	death(char *message, int exit_code)
 {
 	printf("%s\n", message);
 	exit(exit_code);
