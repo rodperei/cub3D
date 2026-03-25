@@ -10,10 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "stdlib.h"
-#include "string.h"
+#ifndef CUBO3D_H
+# define CUBO3D_H
 
-#define MAX_PATH_LENGTH 5000
+# include <stdlib.h>
+# include <string.h>
+# include <stdio.h>
+# include <unistd.h>
+# include <fcntl.h>
+
+# define MAX_PATH_LENGTH 5000
 
 typedef struct s_pos{
 	int x;
@@ -39,3 +45,5 @@ int	valid_map(char *path);
 
 // utils/death.c
 void    death(char *message, int exit_code);
+
+#endif

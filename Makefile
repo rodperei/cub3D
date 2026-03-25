@@ -3,12 +3,13 @@
 # ==========================================
 NAME		:= cub3D
 CC			:= cc
-CFLAGS	:= -Wall -Wextra -Werror -O3
+CFLAGS		:= -Wall -Wextra -Werror -O3
 
 # ==========================================
 # Directory Structure
 # ==========================================
 SRC_DIR		:= src
+TEST_DIR	:= testes
 BUILD_DIR	:= build
 OBJ_DIR		:= $(BUILD_DIR)/objs
 DEP_DIR		:= $(BUILD_DIR)/deps
@@ -21,11 +22,11 @@ SRCS		:= $(SRC_DIR)/parsing/parsing.c \
 				\
 			   $(SRC_DIR)/utils/death.c \
 				\
-			   $(SRC_DIR)/main.c
+			   $(TEST_DIR)/test_parsing.c
 
 # Transforms src/file.c into build/objs/file.o
-OBJS		:= $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
-DEPS		:= $(SRCS:$(SRC_DIR)/%.c=$(DEP_DIR)/%.d)
+OBJS		:= $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRCS))
+DEPS		:= $(patsubst %.c,$(DEP_DIR)/%.d,$(SRCS))
 
 # ==========================================
 # Compiler Flags (including dependency generation)
@@ -42,7 +43,7 @@ $(NAME): $(OBJS)
 	@$(CC) $(OBJS) -o $(NAME)
 	@echo "Build successful!"
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+$(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
 	@mkdir -p $(dir $(DEP_DIR)/$*)
 	@echo "Compiling $<..."

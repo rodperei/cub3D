@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frnicola <frnicola@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,10 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/Cubo3D.h"
+#include "../include/Cubo3D.h"
 
-void    death(char *message, int exit_code)
+int main(int argc, char **argv)
 {
-	printf("%s\n", message);
-	exit(exit_code);
+    if (argc != 2)
+    {
+        printf("Usage: %s <map_file>\n", argv[0]);
+        return 1;
+    }
+
+    valid_map(argv[1]);
+
+    // Initialize game, load map, etc.
+    
+    return 0;
 }

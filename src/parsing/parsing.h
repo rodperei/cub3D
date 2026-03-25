@@ -13,11 +13,7 @@
 #ifndef PARSING_H
 # define PARSING_H
 
-# include <stdlib.h>
-# include <string.h>
-# include <stdio.h>
-# include <unistd.h>
-# include <fcntl.h>
+# include "../../include/Cubo3D.h"
 
 // valid_1.c
 int check_ext(char *path);
