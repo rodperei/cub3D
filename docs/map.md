@@ -15,7 +15,11 @@ Onde:
 - **$j$**: Índice da coluna atual.
     
 - **$\text{total\_colunas}$**: A largura total da matriz.
-    
+
+
+i
+index(i,j) -> map[i+j]
+
 
 ---
 
