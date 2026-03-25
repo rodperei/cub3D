@@ -18,5 +18,7 @@
 
 // valid_1.c
 int		check_ext(char *path);
+int		parse_color(char *str, int *color);
+void	check_path(t_map *map);
 
 #endif

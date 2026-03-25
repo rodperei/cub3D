@@ -32,3 +32,41 @@ int	check_ext(char *path)
 	}
 	return (1);
 }
+
+int	parse_color(char *str, int *color)
+{
+	char	**rgb;
+	int		i;
+
+	rgb = ft_split(str, ',');
+	if (len_all(rgb) != 3)
+	{
+		free_all(rgb);
+		return (0);
+	}
+	i = 0;
+	while (i < 3)
+	{
+		color[i] = atoi(rgb[i]);
+		if (color[i] < 0 || color[i] > 255 || !is_digit(rgb[i]))
+		{
+			free_all(rgb);
+			return (0);
+		}
+		i++;
+	}
+	free_all(rgb);
+	return (1);
+}
+
+void	check_path(t_map *map)
+{
+	if (!exist_file(map->north_wall_texture))
+		death("Error\nNorth wall texture file does not exist", 1);
+	if (!exist_file(map->south_wall_texture))
+		death("Error\nSouth wall texture file does not exist", 1);
+	if (!exist_file(map->west_wall_texture))
+		death("Error\nWest wall texture file does not exist", 1);
+	if (!exist_file(map->east_wall_texture))
+		death("Error\nEast wall texture file does not exist", 1);
+}

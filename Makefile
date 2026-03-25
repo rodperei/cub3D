@@ -26,6 +26,7 @@ SRCS		:= $(SRC_DIR)/parsing/parsing.c \
 			   $(SRC_DIR)/utils/ft_split.c \
 			   $(SRC_DIR)/utils/lens.c \
 			   $(SRC_DIR)/utils/read_file.c \
+			   $(SRC_DIR)/utils/string.c \
 			   $(SRC_DIR)/utils/utils_matriz.c \
 			   $(SRC_DIR)/utils/utils_vec.c \
 				\

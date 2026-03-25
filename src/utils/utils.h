@@ -41,6 +41,11 @@ int		equaln(char *str, char *str1, int size);
 
 // read_file.c
 char	**read_file(int fd, char c);
+int		exist_file(char *path);
+
+// string.c
+int		is_space(char c);
+int		is_digit(char *c);
 
 // utils_matriz.c
 char	**z_maloc_matriz(int size);

@@ -29,7 +29,7 @@ typedef struct s_pos
 	int	y;
 }	t_pos;
 
-typedef struct s_defs
+typedef struct s_map
 {
 	char	north_wall_texture[MAX_PATH_LENGTH];
 	char	south_wall_texture[MAX_PATH_LENGTH];
@@ -42,9 +42,9 @@ typedef struct s_defs
 	t_pos	initial_position;
 	char	initial_direction;
 
-}	t_defs;
+}	t_map;
 
 // parsing/parsing.c
-int		valid_map(char *path);
+int		valid_map(char *path, t_map *map);
 
 #endif

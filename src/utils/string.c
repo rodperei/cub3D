@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_file.c                                        :+:      :+:    :+:   */
+/*   string.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frnicola <frnicola@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,35 +12,20 @@
 
 #include "utils.h"
 
-char	**read_file(int fd, char c)
+int	is_space(char c)
 {
-	char	*text;
-	int		bit_read;
-	char	*buf;
-	char	**text_split;
-
-	buf = z_maloc(SIZE_BUF);
-	text = append(NULL, 1, buf);
-	bit_read = read(fd, buf, SIZE_BUF);
-	while (bit_read > 0)
-	{
-		text = append(text, bit_read, buf);
-		bit_read = read(fd, buf, SIZE_BUF);
-	}
-	close(fd);
-	free (buf);
-	text_split = ft_split(text, c);
-	free(text);
-	return (text_split);
+	return (c == ' ' || c == '\t' || c == '\n' || c == '\f');
 }
 
-int	exist_file(char *path)
+int	is_digit(char *c)
 {
-	int	fd;
-
-	fd = open(path, O_RDONLY);
-	if (fd < 0)
+	if (!c || !*c)
 		return (0);
-	close(fd);
+	while (*c)
+	{
+		if (*c < '0' || *c > '9')
+			return (0);
+		c++;
+	}
 	return (1);
 }
