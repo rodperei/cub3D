@@ -91,3 +91,15 @@ void	free_all(char **matriz)
 		free(matriz);
 	matriz = NULL;
 }
+
+void	print_lines(char **matriz)
+{
+	int	i;
+
+	i = 0;
+	while (matriz[i])
+	{
+		printf("%s\n", matriz[i]);
+		i++;
+	}
+}

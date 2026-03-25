@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read.c                                             :+:      :+:    :+:   */
+/*   read_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frnicola <frnicola@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "utils.h"
 
 char	**read_file(int fd, char c)
 {
@@ -32,21 +32,4 @@ char	**read_file(int fd, char c)
 	text_split = ft_split(text, c);
 	free(text);
 	return (text_split);
-}
-
-void	print_line(char *line)
-{
-	printf("%s\n", line);
-}
-
-void	print_lines(char **lines)
-{
-	int	i;
-
-	i = 0;
-	while (lines[i])
-	{
-		print_line(lines[i]);
-		i++;
-	}
 }

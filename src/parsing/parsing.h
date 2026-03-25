@@ -16,13 +16,6 @@
 # include "../../include/Cubo3D.h"
 # include "../utils/utils.h"
 
-# define SIZE_BUF 1024
-
-// read.c
-char	**read_file(int fd, char c);
-void	print_lines(char **lines);
-void	print_line(char *line);
-
 // valid_1.c
 int		check_ext(char *path);
 

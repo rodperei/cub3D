@@ -20,12 +20,12 @@ DEP_DIR		:= $(BUILD_DIR)/deps
 # ==========================================
 SRCS		:= $(SRC_DIR)/parsing/parsing.c \
 			   $(SRC_DIR)/parsing/valid_1.c \
-			   $(SRC_DIR)/parsing/read.c \
 				\
 			   $(SRC_DIR)/utils/append.c \
 			   $(SRC_DIR)/utils/death.c \
 			   $(SRC_DIR)/utils/ft_split.c \
 			   $(SRC_DIR)/utils/lens.c \
+			   $(SRC_DIR)/utils/read_file.c \
 			   $(SRC_DIR)/utils/utils_matriz.c \
 			   $(SRC_DIR)/utils/utils_vec.c \
 				\
@@ -72,4 +72,8 @@ re: fclean all
 # Include generated dependency files
 -include $(DEPS)
 
-.PHONY: all clean fclean re
+norm:
+	@echo "Running norminette..."
+	@norminette $(SRC_DIR) $(TEST_DIR) ./include
+
+.PHONY: all clean fclean re norm
