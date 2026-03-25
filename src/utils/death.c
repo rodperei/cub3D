@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/Cubo3D.h"
+#include "utils.h"
 
 void	death(char *message, int exit_code)
 {

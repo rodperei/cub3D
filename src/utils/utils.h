@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frnicola <frnicola@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUBO3D_H
-# define CUBO3D_H
+#ifndef UTILS_H
+# define UTILS_H
 
 # include <stdlib.h>
 # include <string.h>
@@ -19,32 +19,33 @@
 # include <unistd.h>
 # include <fcntl.h>
 
-# include "../src/utils/utils.h"
+// append.c
+char	*append(char *vec, int size_new, char *buff);
+char	*copy_vec(char *str);
+char	**append_matriz(char **matriz, char *new_line);
 
-# define MAX_PATH_LENGTH 5000
+// death.c
+void	death(char *message, int exit_code);
 
-typedef struct s_pos
-{
-	int	x;
-	int	y;
-}	t_pos;
+// ft_split.c
+char	**ft_split(char *str, char C);
+int     cont_words(char *str, char C);
+int     cont_letter(char *str, char C);
 
-typedef struct s_defs
-{
-	char	north_wall_texture[MAX_PATH_LENGTH];
-	char	south_wall_texture[MAX_PATH_LENGTH];
-	char	west_wall_texture[MAX_PATH_LENGTH];
-	char	east_wall_texture[MAX_PATH_LENGTH];
-	int		floor_color[3];
-	int		ceiling_color[3];
+// utils_matriz.c
+char	**z_maloc_matriz(int size);
+char	**delete_vec_matriz(char **matriz, int index_delete);
+int     count_caracter_matriz(char **mp, char c);
+void	free_all(char **matriz);
 
-	char	**map;
-	t_pos	initial_position;
-	char	initial_direction;
+// utils_vec.c
+char	*z_maloc(int size);
+int     count_caracter(char *mp, char c);
+int     include(char *str_long, char *str_small);
 
-}	t_defs;
-
-// parsing/parsing.c
-int		valid_map(char *path);
+// lens.c
+int     len_all(char **str);
+int     equal(char *str, char *str1);
+int     equaln(char *str, char *str1, int size);
 
 #endif

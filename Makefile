@@ -22,8 +22,12 @@ SRCS		:= $(SRC_DIR)/parsing/parsing.c \
 			   $(SRC_DIR)/parsing/valid_1.c \
 			   $(SRC_DIR)/parsing/read.c \
 				\
-			   $(SRC_DIR)/utils/death.c \
 			   $(SRC_DIR)/utils/append.c \
+			   $(SRC_DIR)/utils/death.c \
+			   $(SRC_DIR)/utils/ft_split.c \
+			   $(SRC_DIR)/utils/lens.c \
+			   $(SRC_DIR)/utils/utils_matriz.c \
+			   $(SRC_DIR)/utils/utils_vec.c \
 				\
 			   $(TEST_DIR)/test_parsing.c
 

@@ -10,21 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/Cubo3D.h"
-
-char	*z_maloc(int size)
-{
-	char	*vec;
-
-	vec = malloc(sizeof(char) * (size + 1));
-	while (size)
-	{
-		vec[size] = '\0';
-		size--;
-	}
-	vec[0] = '\0';
-	return (vec);
-}
+#include "utils.h"
 
 char	*append(char *vec, int size_new, char *buff)
 {
@@ -53,4 +39,45 @@ char	*append(char *vec, int size_new, char *buff)
 	if (vec_ori)
 		free(vec_ori);
 	return (new_ori);
+}
+
+char	*copy_vec(char *str)
+{
+	int		x;
+	char	*result;
+	int		aux;
+
+	x = strlen((const char *)str);
+	result = malloc((x + 1) * sizeof(char));
+	if (!result)
+		return (NULL);
+	aux = 0;
+	while (aux != x)
+	{
+		result[aux] = str[aux];
+		aux++;
+	}
+	result[aux] = '\0';
+	return (result);
+}
+
+char	**append_matriz(char **matriz, char *new_line)
+{
+	int		aux;
+	char	**result;
+
+	if (!matriz)
+		matriz = z_maloc_matriz(0);
+	result = z_maloc_matriz(len_all(matriz) + 1);
+	aux = 0;
+	while (matriz && matriz[aux])
+	{
+		result[aux] = copy_vec(matriz[aux]);
+		aux++;
+	}
+	result[aux] = copy_vec(new_line);
+	result[aux + 1] = NULL;
+	if (matriz)
+		free_all(matriz);
+	return (result);
 }

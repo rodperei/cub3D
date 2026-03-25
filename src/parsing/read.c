@@ -12,25 +12,26 @@
 
 #include "parsing.h"
 
-char	*read_file(char *path)
+char	**read_file(int fd, char c)
 {
-	char	buffer[1024];
-	int		fd;
-	int		bytes_read;
-	char	*line;
+	char	*text;
+	int		bit_read;
+	char	*buf;
+	char	**text_split;
 
-	fd = open(path, O_RDONLY);
-	if (fd < 0)
-		return (NULL);
-	line = NULL;
-	bytes_read = read(fd, buffer, sizeof(buffer) - 1);
-	while (bytes_read > 0)
+	buf = z_maloc(SIZE_BUF);
+	text = append(NULL, 1, buf);
+	bit_read = read(fd, buf, SIZE_BUF);
+	while (bit_read > 0)
 	{
-		line = append(line, bytes_read, buffer);
-		bytes_read = read(fd, buffer, sizeof(buffer) - 1);
+		text = append(text, bit_read, buf);
+		bit_read = read(fd, buf, SIZE_BUF);
 	}
 	close(fd);
-	return (line);
+	free (buf);
+	text_split = ft_split(text, c);
+	free(text);
+	return (text_split);
 }
 
 void	print_line(char *line)

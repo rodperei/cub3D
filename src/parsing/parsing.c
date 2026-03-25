@@ -15,15 +15,15 @@
 int	valid_map(char *path)
 {
 	int		fd;
-	char	*line;
+	char	**lines;
 
 	if (!check_ext(path))
 		death("Error: Invalid file extension. Expected .cub", 1);
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
 		death("Error: Failed to open file", 1);
-	line = read_file(path);
-	print_line(line);
-	free(line);
+	lines = read_file(fd, '\n');
+	print_lines(lines);
+	free_all(lines);
 	return (1);
 }
