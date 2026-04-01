@@ -1,4 +1,5 @@
 build
+cub3D
 *.o
 *.d
 .clangd
