@@ -3,8 +3,8 @@
 # ==========================================
 NAME		:= cub3D
 CC			:= cc
-CFLAGS		:= -Wall -Wextra -Werror -O3
-LDFLAGS		:= -fsanitize=address
+CFLAGS		:= -Wall -Wextra -Werror -O0 #-fsanitize=address
+LDFLAGS		:= -L./lib/minilibx-linux/ -lmlx -lXext -lX11 -lm
 
 # ==========================================
 # Directory Structure
@@ -31,6 +31,7 @@ SRCS		:= $(SRC_DIR)/parsing/parsing.c \
 			   $(SRC_DIR)/utils/utils_vec.c \
 				\
 			   $(TEST_DIR)/test_parsing.c
+#SRCS		:=	./tmp_main.c 
 
 # Transforms src/file.c into build/objs/file.o
 OBJS		:= $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRCS))
@@ -44,18 +45,23 @@ CPPFLAGS	= -MMD -MP -MF $(DEP_DIR)/$*.d
 # ==========================================
 # Build Rules
 # ==========================================
-all: $(NAME)
+all: .mlx $(NAME)
+
+.mlx:
+	@echo "Building mlx..."
+	@$(MAKE) -C ./lib/minilibx-linux/
+	@touch .mlx
 
 $(NAME): $(OBJS)
 	@echo "Linking $(NAME)..."
-	@$(CC) $(OBJS) $(LDFLAGS) -o $(NAME)
+	@$(CC) $(OBJS) -o $(NAME) $(LDFLAGS)
 	@echo "Build successful!"
 
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
 	@mkdir -p $(dir $(DEP_DIR)/$*)
 	@echo "Compiling $<..."
-	@$(CC) $(CFLAGS) $(LDFLAGS) $(CPPFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 
 # ==========================================
 # Cleanup
@@ -66,7 +72,8 @@ clean:
 
 fclean: clean
 	@echo "Cleaning binary..."
-	@rm -rf $(NAME)
+	@$(MAKE) -C ./lib/minilibx-linux/ clean
+	@rm -rf $(NAME) .mlx
 
 re: fclean all
 
