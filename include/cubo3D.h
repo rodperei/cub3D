@@ -19,9 +19,15 @@
 # include <unistd.h>
 # include <fcntl.h>
 
-# include "../src/utils/utils.h"
-
 # define MAX_PATH_LENGTH 5000
+
+#define WIDTH	1280
+#define HEIGHT	720
+#define BLOCK	64
+
+#define PI 3.141592654
+
+#define DEBUG 0
 
 typedef struct	s_player
 {
@@ -45,6 +51,24 @@ typedef struct	s_map
 	int		cols;
 }	t_map;
 
+typedef struct	s_img
+{
+	void	*inst;
+	char	*data;
+	int		bpp;
+	int		len;
+	int		end;
+}	t_img;
+
+typedef struct	s_game
+{
+	void		*mlx;
+	void		*win;
+	t_img		img;
+	t_player	player;
+	t_map		map;
+} t_game;
+
 typedef struct s_defs
 {
 	char		north_wall_texture[MAX_PATH_LENGTH];
@@ -61,5 +85,8 @@ typedef struct s_defs
 
 // parsing/parsing.c
 int		valid_map(char *path, t_map *map);
+
+//	rendering/rendering.c
+int	draw_loop(t_game	*game);
 
 #endif
