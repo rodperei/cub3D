@@ -47,20 +47,22 @@ void	draw_map(t_game *game)
 	/*Esta função será modificada para ser capaz de desenhar mapas não
 	 quadrados*/
 	t_map	map;
-	int		x;
-	int		y;
+	t_pos	pos;
+	t_pos	tmp;
 
 	map = game->map;
-	x = -1;
-	while (++x < map.lines)
+	pos.x = -1;
+	while (++(pos.x) < map.lines)
 	{
-		y = -1;
-		while (++y < map.cols)
+		pos.y = -1;
+		while (++(pos.y) < map.cols)
 		{
-			if (map.map[x][y] == 1)
-				draw_square(x * BLOCK, y * BLOCK, BLOCK, 0xDEDEDE, game);
+			tmp.x = pos.x * BLOCK;
+			tmp.y = pos.y * BLOCK;
+			if (map.map[pos.x][pos.y] == 1)
+				draw_square(tmp, BLOCK, 0xDEDEDE, game);
 			else
-				draw_square(x * BLOCK, y * BLOCK, BLOCK, 0x545454, game);
+				draw_square(tmp, BLOCK, 0x545454, game);
 		}
 	}
 }
@@ -85,25 +87,26 @@ void	draw_line(t_player *player, t_game *game, float start_x, int i)
 
 int	draw_loop(t_game	*game)
 {
-	t_player	*player;
 	float		offset;
 	float		start_x;
 	int			i;
+	t_pos		pos;
 
-	player = &game->player;
-	move_player(player);
+	move_player(&game->player);
 	clear_image(&game->img);
+	pos.x = game->player.x;
+	pos.y = game->player.y;
 	if (DEBUG)
 	{
 		draw_map(game);
-		draw_square(player->x, player->y, 10, 0xDBBD12, game);
+		draw_square(pos, 10, 0xDBBD12, game);
 	}
 	offset = PI / 3 / WIDTH;
 	start_x = game->player.angle - PI / 6;
 	i = -1;
 	while (++i < WIDTH)
 	{
-		draw_line(player, game, start_x, i);
+		draw_line(&game->player, game, start_x, i);
 		start_x += offset;
 	}
 	mlx_put_image_to_window(game->mlx, game->win, game->img.inst, 0, 0);

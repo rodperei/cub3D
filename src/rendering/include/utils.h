@@ -16,7 +16,13 @@
 typedef struct s_img	t_img;
 typedef struct s_game	t_game;
 
+typedef struct s_pos
+{
+	int	x;
+	int	y;
+}	t_pos;
+
 void	put_pixel(int x, int y, int color, t_img *img);
-void	draw_square(int x, int y, int size, int color, t_game *game);
+void	draw_square(t_pos pos, int size, int color, t_game *game);
 
 #endif
