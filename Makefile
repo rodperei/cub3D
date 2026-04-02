@@ -3,7 +3,7 @@
 # ==========================================
 NAME		:= cub3D
 CC			:= cc
-CFLAGS		:= -Wall -Wextra -Werror -O0 #-fsanitize=address
+CFLAGS		:= -Wall -Wextra -Werror -O0 -I./include/ #-fsanitize=address
 LDFLAGS		:= -L./lib/minilibx-linux/ -lmlx -lXext -lX11 -lm
 
 # ==========================================
@@ -18,7 +18,7 @@ DEP_DIR		:= $(BUILD_DIR)/deps
 # ==========================================
 # Source & Object Discovery
 # ==========================================
-SRCS		:= $(SRC_DIR)/parsing/parsing.c \
+#SRCS		:= $(SRC_DIR)/parsing/parsing.c \
 			   $(SRC_DIR)/parsing/valid_1.c \
 				\
 			   $(SRC_DIR)/utils/append.c \
@@ -31,7 +31,12 @@ SRCS		:= $(SRC_DIR)/parsing/parsing.c \
 			   $(SRC_DIR)/utils/utils_vec.c \
 				\
 			   $(TEST_DIR)/test_parsing.c
-#SRCS		:=	./tmp_main.c 
+SRCS		:=	$(SRC_DIR)/rendering/line.c \
+				$(SRC_DIR)/rendering/movement.c \
+				$(SRC_DIR)/rendering/rendering.c \
+				$(SRC_DIR)/rendering/utils.c \
+				\
+				./tmp_main.c 
 
 # Transforms src/file.c into build/objs/file.o
 OBJS		:= $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRCS))
