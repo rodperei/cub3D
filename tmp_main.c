@@ -13,6 +13,7 @@
 #include <stdlib.h>
 #include <cubo3D.h>
 #include "lib/minilibx-linux/mlx.h"
+#include "src/utils/utils.h"
 
 #define W		119
 #define A		97
@@ -20,6 +21,18 @@
 #define D		100
 #define LEFT	0xff51
 #define RIGHT	0xff53
+#define ESC		0xff1b
+
+int	close_game(t_game *game)
+{
+	mlx_destroy_image(game->mlx, game->img.inst);
+	mlx_destroy_window(game->mlx, game->win);
+	mlx_destroy_display(game->mlx);
+	free(game->mlx);
+	free_all(game->map.map);
+	exit(0);
+	return (0);
+}
 
 void	init_player(t_player *player)
 {
@@ -52,20 +65,22 @@ int	key_press(int keycode, t_player *player)
 	return (0);
 }
 
-int	key_release(int keycode, t_player *player)
+int	key_release(int keycode, t_game *game)
 {
 	if (keycode == W)
-		player->key_up = 0;
+		game->player.key_up = 0;
 	if (keycode == S)
-		player->key_down = 0;
+		game->player.key_down = 0;
 	if (keycode == A)
-		player->key_left = 0;
+		game->player.key_left = 0;
 	if (keycode == D)
-		player->key_right = 0;
+		game->player.key_right = 0;
 	if (keycode == LEFT)
-		player->left_rotate = 0;
+		game->player.left_rotate = 0;
 	if (keycode == RIGHT)
-		player->right_rotate = 0;
+		game->player.right_rotate = 0;
+	if (keycode == ESC)
+		close_game(game);
 	return (0);
 }
 
@@ -74,22 +89,23 @@ t_map	get_map()
 	/*No futuro, esta função será trocada pelo recebimento do mapa analizado
 	 na fase de parsing. Será apagado no final*/
 	t_map	ret;
-	char	**map = malloc(sizeof(char *) * 8);
-	char	tmp[8][8] = {{1, 1, 1, 1, 1, 1, 1, 1},
-						 {1, 0, 0, 1, 0, 0, 0, 1},
-						 {1, 0, 0, 0, 0, 0, 0, 1},
-						 {1, 0, 0, 0, 0, 0, 0, 1}, 
-						 {1, 0, 0, 0, 0, 0, 0, 1}, 
-						 {1, 0, 0, 0, 0, 0, 0, 1}, 
-						 {1, 0, 0, 0, 0, 0, 0, 1}, 
-						 {1, 1, 1, 1, 1, 1, 1, 1}};
+	char	**map = malloc(sizeof(char *) * 9);
+	char	tmp[8][9] = {"11111111",
+						 "10010001",
+						 "10000001",
+						 "10000001",
+						 "10000001",
+						 "10000001",
+						 "10000001",
+						 "11111111"};
 
 	for(int i = 0; i < 8; i++)
 	{
-		map[i] = malloc(sizeof(char) * 8);
-		for(int j = 0; j < 8; j++)
+		map[i] = malloc(sizeof(char) * 9);
+		for(int j = 0; j < 9; j++)
 			map[i][j] = tmp[j][i];
 	}
+	map[8] = 0;
 	ret.map = map;
 	ret.cols = 8;
 	ret.lines = 8;
@@ -127,8 +143,15 @@ int	main(void)
 
 	if (!init_game(&game))
 		return (1);
+	mlx_hook(game.win, 17, 0L, close_game, &game);
 	mlx_hook(game.win, 2, 1L << 0, key_press, &game.player);
-	mlx_hook(game.win, 3, 1L << 1, key_release, &game.player);
+	mlx_hook(game.win, 3, 1L << 1, key_release, &game);
 	mlx_loop_hook(game.mlx, draw_loop, &game);
 	mlx_loop(game.mlx);
+/*	|***CONTINUE_HERE!!!***|
+		-resolver leaks
+		-Adicionar cor do chão e do teto
+		-adicionar texturas em todas as orientações de parede
+		-adicionar colisão
+		-juntar parsing e execussão*/
 }

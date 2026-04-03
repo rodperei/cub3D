@@ -59,9 +59,9 @@ void	draw_map(t_game *game)
 		{
 			tmp.x = pos.x * BLOCK;
 			tmp.y = pos.y * BLOCK;
-			if (map.map[pos.x][pos.y] == 1)
+			if (map.map[pos.x][pos.y] == '1')
 				draw_square(tmp, BLOCK, 0xDEDEDE, game);
-			else
+			else if (map.map[pos.x][pos.y] == '0')
 				draw_square(tmp, BLOCK, 0x545454, game);
 		}
 	}

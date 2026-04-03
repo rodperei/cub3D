@@ -56,7 +56,7 @@ char	touch(float px, float py, char **map)
 
 	x = px / BLOCK;
 	y = py / BLOCK;
-	if (map[x][y] == 1)
+	if (map[x][y] == '1')
 		return (1);
 	return (0);
 }

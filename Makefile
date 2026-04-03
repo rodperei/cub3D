@@ -3,7 +3,7 @@
 # ==========================================
 NAME		:= cub3D
 CC			:= cc
-CFLAGS		:= -Wall -Wextra -Werror -O0 -I./include/ #-fsanitize=address
+CFLAGS		:= -Wall -Wextra -Werror -O0 -g -I./include/ #-fsanitize=address
 LDFLAGS		:= -L./lib/minilibx-linux/ -lmlx -lXext -lX11 -lm
 
 # ==========================================
@@ -35,6 +35,10 @@ SRCS		:=	$(SRC_DIR)/rendering/line.c \
 				$(SRC_DIR)/rendering/movement.c \
 				$(SRC_DIR)/rendering/rendering.c \
 				$(SRC_DIR)/rendering/utils.c \
+				$(SRC_DIR)/utils/utils_matriz.c \
+				$(SRC_DIR)/utils/utils_vec.c \
+				$(SRC_DIR)/utils/append.c \
+				$(SRC_DIR)/utils/lens.c \
 				\
 				./tmp_main.c 
 

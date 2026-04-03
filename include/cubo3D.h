@@ -27,7 +27,7 @@
 
 #define PI 3.141592654
 
-#define DEBUG 0
+#define DEBUG 1
 
 typedef struct	s_player
 {

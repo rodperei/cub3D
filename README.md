@@ -176,11 +176,36 @@ Examples:
 
 ---
 
+### 4. Breaking Changes
+#### 1. The "Bang" Method (`!`)
 
-✅ **In short**:
+The quickest way to flag a breaking change is to add an exclamation point (`!`) immediately after the commit type (and scope, if you use one) but before the colon. This draws immediate visual attention to the fact that something is changing fundamentally.
 
-* Stick to `<type>(scope): description`.
-* Keep it concise, imperative, and consistent.
-* Use body for details and footer for breaking changes/issues.
+**Format:**
+
+`type(scope)!: description`
+
+**Example:**
+
+`feat(api)!: remove deprecated v1 endpoints`
+
+#### 2. The Footer Method (Recommended)
+
+For the sake of clarity and automated tooling (like changelog generators), you should also include a detailed explanation in the footer of the commit message. This must start with the uppercase string `BREAKING CHANGE:`, followed by a description of what changed and a migration guide if necessary.
+
+### Example of a Complete Commit Message:
+
+Plaintext
+
+```
+feat(auth): switch from JWT to OAuth2
+
+We are migrating our authentication provider to OAuth2 to support 
+third-party integrations. JWT tokens will no longer be accepted.
+
+BREAKING CHANGE: The `Authorization: Bearer <JWT>` header is no longer 
+supported. Use the new OAuth2 flow instead.
+```
+
 
 ---
