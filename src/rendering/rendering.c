@@ -72,7 +72,7 @@ void	draw_line(t_player *player, t_game *game, float start_x, int i)
 
 	ray_x = player->x;
 	ray_y = player->y;
-	while (!touch(ray_x, ray_y, game->map.map))
+	while (ray_x >= 0 && ray_y >= 0 && !touch(ray_x, ray_y, game->map.map))
 	{
 		if (DEBUG)
 			put_pixel(ray_x, ray_y, 0xFF0000, &game->img);
