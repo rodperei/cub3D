@@ -44,10 +44,10 @@ void	draw_3d(t_game *game, float ray_x, float ray_y, int i)
 	j = -1;
 	// Mudar a cor do loop para a cor do teto
 	while (++j < start_y)
-		put_pixel(i, j, 0xFF00, &game->img);
+		put_pixel(i, j, 0xFF, &game->img);
 	while (start_y < end)
 	{
-		put_pixel(i, start_y, 0xFF, &game->img);
+		put_pixel(i, start_y, 0xFF00, &game->img);
 		start_y++;
 	}
 	start_y--;

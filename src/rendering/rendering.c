@@ -16,16 +16,16 @@
 #include "include/utils.h"
 #include "../../lib/minilibx-linux/mlx.h"
 
-void	move_player(t_player *player)
+void	move_player(t_game *game)
 {
 	int		speed;
 	float	angle_speed;
 
 	speed = 4;
 	angle_speed = 0.06;
-	rotate_player(player, angle_speed);
-	translate_vertical(player, speed);
-	translate_horizontal(player, speed);
+	rotate_player(&game->player, angle_speed);
+	translate_vertical(game, speed);
+	translate_horizontal(game, speed);
 }
 
 void	clear_image(t_img *img)
@@ -44,8 +44,6 @@ void	clear_image(t_img *img)
 
 void	draw_map(t_game *game)
 {
-	/*Esta função será modificada para ser capaz de desenhar mapas não
-	 quadrados*/
 	t_map	map;
 	t_pos	pos;
 	t_pos	tmp;
@@ -92,7 +90,7 @@ int	draw_loop(t_game	*game)
 	int			i;
 	t_pos		pos;
 
-	move_player(&game->player);
+	move_player(game);
 	clear_image(&game->img);
 	pos.x = game->player.x;
 	pos.y = game->player.y;

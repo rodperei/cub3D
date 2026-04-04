@@ -150,6 +150,6 @@ int	main(void)
 	mlx_loop(game.mlx);
 /*	|***CONTINUE_HERE!!!***|
 		-adicionar texturas em todas as orientações de parede
-		-adicionar colisão
+		-criar função que define a posição inicial do jogador consoante defs
 		-juntar parsing e execussão*/
 }
