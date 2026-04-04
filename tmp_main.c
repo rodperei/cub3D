@@ -149,8 +149,6 @@ int	main(void)
 	mlx_loop_hook(game.mlx, draw_loop, &game);
 	mlx_loop(game.mlx);
 /*	|***CONTINUE_HERE!!!***|
-		-resolver leaks
-		-Adicionar cor do chão e do teto
 		-adicionar texturas em todas as orientações de parede
 		-adicionar colisão
 		-juntar parsing e execussão*/

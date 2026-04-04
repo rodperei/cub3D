@@ -33,20 +33,27 @@ float	fixed_distance(t_player player, float x2, float y2)
 
 void	draw_3d(t_game *game, float ray_x, float ray_y, int i)
 {
-	float	dist;
+	int		j;
 	float	height;
 	int		start_y;
 	int		end;
 
-	dist = fixed_distance(game->player, ray_x, ray_y);
-	height = (BLOCK / dist) * (WIDTH / 2);
+	height = (BLOCK / fixed_distance(game->player, ray_x, ray_y)) * (WIDTH / 2);
 	start_y = (HEIGHT - height) / 2;
 	end = start_y + height;
+	j = -1;
+	// Mudar a cor do loop para a cor do teto
+	while (++j < start_y)
+		put_pixel(i, j, 0xFF00, &game->img);
 	while (start_y < end)
 	{
-		put_pixel(i, start_y, 255, &game->img);
+		put_pixel(i, start_y, 0xFF, &game->img);
 		start_y++;
 	}
+	start_y--;
+	// Mudar a cor do loop para a cor do chão
+	while (++start_y < HEIGHT)
+		put_pixel(i, start_y, 0xFF0000, &game->img);
 }
 
 char	touch(float px, float py, char **map)
