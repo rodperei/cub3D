@@ -19,7 +19,7 @@ float	distance(float x, float y)
 	return (sqrtf(x * x + y * y));
 }
 
-float	fixed_distance(t_player player, float x2, float y2)
+float	fixed_distance(t_entity player, float x2, float y2)
 {
 	float	delta_x;
 	float	delta_y;
@@ -30,6 +30,8 @@ float	fixed_distance(t_player player, float x2, float y2)
 	angle = atan2f(delta_y, delta_x) - player.angle;
 	return (distance(delta_x, delta_y) * cosf(angle));
 }
+
+
 
 void	draw_3d(t_game *game, float ray_x, float ray_y, int i)
 {
@@ -48,6 +50,7 @@ void	draw_3d(t_game *game, float ray_x, float ray_y, int i)
 	while (start_y < end)
 	{
 		put_pixel(i, start_y, 0xFF00, &game->img);
+		//copy_texture();
 		start_y++;
 	}
 	start_y--;

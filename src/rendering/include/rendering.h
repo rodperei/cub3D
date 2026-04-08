@@ -14,7 +14,7 @@
 # define RENDERING_H
 
 typedef struct s_game	t_game;
-typedef struct s_player	t_player;
+typedef struct s_entity	t_player;
 
 // ../line.c
 void	draw_3d(t_game *game, float ray_x, float ray_y, int i);

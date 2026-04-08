@@ -23,6 +23,7 @@
 #define RIGHT	0xff53
 #define ESC		0xff1b
 
+
 int	close_game(t_game *game)
 {
 	mlx_destroy_image(game->mlx, game->img.inst);
@@ -34,12 +35,12 @@ int	close_game(t_game *game)
 	return (0);
 }
 
-void	init_player(t_player *player)
+void	init_player(t_entity *player)
 {
 	/*A posição inicial será decidida consoante a coordenada dada no mapa*/
-	player->x = 90;
-	player->y = 90;
-	player->angle = (3 * PI) / 2;
+	player->x = 240;
+	player->y = 190;
+	player->angle = PI;
 	player->key_up = 0;
 	player->key_down = 0;
 	player->key_left = 0;
@@ -48,7 +49,7 @@ void	init_player(t_player *player)
 	player->right_rotate = 0;
 }
 
-int	key_press(int keycode, t_player *player)
+int	key_press(int keycode, t_entity *player)
 {
 	if (keycode == W)
 		player->key_up = 1;
@@ -91,13 +92,13 @@ t_map	get_map()
 	t_map	ret;
 	char	**map = malloc(sizeof(char *) * 9);
 	char	tmp[8][9] = {"11111111",
-						 "10010001",
 						 "10000001",
 						 "10000001",
 						 "10000001",
 						 "10000001",
 						 "10000001",
-						 "01111111"};
+						 "10000001",
+						 "11111111"};
 
 	for(int i = 0; i < 8; i++)
 	{

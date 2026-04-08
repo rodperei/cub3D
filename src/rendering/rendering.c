@@ -65,7 +65,7 @@ void	draw_map(t_game *game)
 	}
 }
 
-void	draw_line(t_player *player, t_game *game, float start_x, int i)
+void	draw_line(t_entity *player, t_game *game, float start_x, int i)
 {
 	float	ray_x;
 	float	ray_y;
@@ -81,6 +81,13 @@ void	draw_line(t_player *player, t_game *game, float start_x, int i)
 	}
 	if (!DEBUG)
 		draw_3d(game, ray_x, ray_y, i);
+}
+
+void	cast_ray(t_entity *player)
+{
+	t_entity ray;
+
+
 }
 
 int	draw_loop(t_game	*game)

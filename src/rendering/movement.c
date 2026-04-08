@@ -17,7 +17,7 @@
 #define COS 0
 #define SIN 1
 
-void	rotate_player(t_player *player, float speed)
+void	rotate_player(t_entity *player, float speed)
 {
 	if (player->left_rotate)
 		player->angle -= speed;
@@ -48,7 +48,7 @@ void	translate_vertical(t_game *game, int speed)
 {
 	t_grid		x;
 	t_grid		y;
-	t_player	*player;
+	t_entity	*player;
 
 	player = &game->player;
 	x = calc_offset(player->x, player->angle, COS);
@@ -73,7 +73,7 @@ void	translate_horizontal(t_game *game, int speed)
 {
 	t_grid		x;
 	t_grid		y;
-	t_player	*player;
+	t_entity	*player;
 
 	player = &game->player;
 	x = calc_offset(player->x, player->angle - PI / 2, COS);

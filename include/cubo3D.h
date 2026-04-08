@@ -27,9 +27,9 @@
 
 #define PI 3.141592654
 
-#define DEBUG 0
+#define DEBUG 1
 
-typedef struct	s_player
+typedef struct	s_entity
 {
 	float	x;
 	float	y;
@@ -42,7 +42,7 @@ typedef struct	s_player
 
 	char	left_rotate;
 	char	right_rotate;
-}	t_player;
+}	t_entity;
 
 typedef struct	s_map
 {
@@ -65,7 +65,7 @@ typedef struct	s_game
 	void		*mlx;
 	void		*win;
 	t_img		img;
-	t_player	player;
+	t_entity	player;
 	t_map		map;
 } t_game;
 
@@ -79,7 +79,7 @@ typedef struct s_defs
 	int			ceiling_color[3];
 
 	t_map		map;
-	t_player	player;
+	t_entity	player;
 
 }	t_defs;
 
