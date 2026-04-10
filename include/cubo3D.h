@@ -19,8 +19,6 @@
 # include <unistd.h>
 # include <fcntl.h>
 
-# define MAX_PATH_LENGTH 5000
-
 #define WIDTH	1280
 #define HEIGHT	720
 #define BLOCK	64
@@ -53,7 +51,7 @@ typedef struct	s_map
 
 typedef struct	s_img
 {
-	void	*inst;
+	void	*inst; // instância
 	char	*data;
 	int		bpp;
 	int		len;
@@ -69,12 +67,26 @@ typedef struct	s_game
 	t_map		map;
 } t_game;
 
+typedef struct	s_texture
+{
+	t_img	img;
+	int		width;
+	int		height;
+}	t_texture;
+
 typedef struct s_defs
 {
-	char		north_wall_texture[MAX_PATH_LENGTH];
-	char		south_wall_texture[MAX_PATH_LENGTH];
-	char		west_wall_texture[MAX_PATH_LENGTH];
-	char		east_wall_texture[MAX_PATH_LENGTH];
+	/*
+	 t_img img;
+	 t_texture wall;
+
+
+	 img.inst = mlx_xpm_file_to_image(mlx, "./path", &wall.width, &wall.height)*/
+	void		*mlx;
+	t_texture	north_wall_texture;
+	t_texture	south_wall_texture;
+	t_texture	west_wall_texture;
+	t_texture	east_wall_texture;
 	int			floor_color[3];
 	int			ceiling_color[3];
 
