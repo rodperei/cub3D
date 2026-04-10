@@ -14,7 +14,7 @@
 # define UTILS_H
 
 typedef struct s_img	t_img;
-typedef struct s_game	t_game;
+typedef struct s_defs	t_defs;
 
 typedef struct s_pos
 {
@@ -36,7 +36,7 @@ typedef struct	s_ray
 }	t_ray;
 
 void	put_pixel(int x, int y, int color, t_img *img);
-void	draw_square(t_pos pos, int size, int color, t_game *game);
+void	draw_square(t_pos pos, int size, int color, t_defs *game);
 float	distance(float x, float y);
 
 #endif

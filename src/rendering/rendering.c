@@ -16,13 +16,13 @@
 #include "include/utils.h"
 #include "../../lib/minilibx-linux/mlx.h"
 
-void	move_player(t_game *game)
+void	move_player(t_defs *game)
 {
 	int		speed;
 	float	angle_speed;
 
 	speed = 3;
-	angle_speed = 0.01;
+	angle_speed = 0.03;
 	rotate_player(&game->player, angle_speed);
 	translate_vertical(game, speed);
 	translate_horizontal(game, speed);
@@ -42,7 +42,7 @@ void	clear_image(t_img *img)
 	}
 }
 
-void	draw_map(t_game *game)
+void	draw_map(t_defs *game)
 {
 	t_map	map;
 	t_pos	pos;
@@ -79,7 +79,7 @@ int	calc_step(int n1, int n2)
 	return (-1);
 }
 
-void draw_ray(t_game *game, t_ray ray, int color)
+void draw_ray(t_defs *game, t_ray ray, int color)
 {
 	t_pos	curr;
 	t_pos	d;
@@ -92,7 +92,7 @@ void draw_ray(t_game *game, t_ray ray, int color)
 	err = d.x + d.y;
     while (1)
     {
-		put_pixel(curr.x, curr.y, color, &game->img);
+		put_pixel(curr.x, curr.y, color, &game->frame);
         if (curr.x == (int)ray.x && curr.y == (int)ray.y)
             break;
         if ((2 * err) >= d.y)
@@ -126,7 +126,7 @@ void	calc_first_hisect(t_entity player, t_ray *ix)
 	ix->x = (player.y - ix->y) * arc_tan + player.x;
 }
 
-t_ray	calc_horizontal_isect(t_game game, float angle)
+t_ray	calc_horizontal_isect(t_defs game, float angle)
 {
 	t_ray	ix;
 	float	y_step;
@@ -164,7 +164,7 @@ void calc_first_visect(t_entity player, t_ray *ix)
 	ix->y = player.y + (player.x - ix->x) * -tanf(ix->angle);
 }
 
-t_ray	calc_vertical_isect(t_game game, float angle)
+t_ray	calc_vertical_isect(t_defs game, float angle)
 {
 	t_ray	ix;
 	float	x_step;
@@ -187,7 +187,7 @@ t_ray	calc_vertical_isect(t_game game, float angle)
 	return (ix);
 }
 
-void	cast_ray(t_game *game, float angle, int i, int color)
+void	cast_ray(t_defs *game, float angle, int i, int color)
 {
 	t_ray	h_isect;
 	t_ray	v_isect;
@@ -212,7 +212,7 @@ void	cast_ray(t_game *game, float angle, int i, int color)
 		draw_3d(game, h_isect, i);
 }
 
-int	draw_loop(t_game	*game)
+int	draw_loop(t_defs	*game)
 {
 	float		offset;
 	float		start_x;
@@ -220,7 +220,7 @@ int	draw_loop(t_game	*game)
 	t_pos		pos;
 
 	move_player(game);
-	clear_image(&game->img);
+	clear_image(&game->frame);
 	pos.x = game->player.x;
 	pos.y = game->player.y;
 	if (DEBUG)
@@ -236,6 +236,6 @@ int	draw_loop(t_game	*game)
 		cast_ray(game, start_x, i, 0xFF0000);
 		start_x += offset;
 	}
-	mlx_put_image_to_window(game->mlx, game->win, game->img.inst, 0, 0);
+	mlx_put_image_to_window(game->mlx, game->win, game->frame.inst, 0, 0);
 	return (0);
 }

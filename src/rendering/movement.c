@@ -44,7 +44,7 @@ t_grid	calc_offset(float pos, float angle, char opt)
 	return (grid);
 }
 
-void	translate_vertical(t_game *game, int speed)
+void	translate_vertical(t_defs *game, int speed)
 {
 	t_grid		x;
 	t_grid		y;
@@ -69,7 +69,7 @@ void	translate_vertical(t_game *game, int speed)
 	}
 }
 
-void	translate_horizontal(t_game *game, int speed)
+void	translate_horizontal(t_defs *game, int speed)
 {
 	t_grid		x;
 	t_grid		y;

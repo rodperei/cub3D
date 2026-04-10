@@ -24,9 +24,13 @@
 #define ESC		0xff1b
 
 
-int	close_game(t_game *game)
+int	close_game(t_defs *game)
 {
-	mlx_destroy_image(game->mlx, game->img.inst);
+	mlx_destroy_image(game->mlx, game->frame.inst);
+	mlx_destroy_image(game->mlx, game->north_wall_texture.img.inst);
+	mlx_destroy_image(game->mlx, game->south_wall_texture.img.inst);
+	mlx_destroy_image(game->mlx, game->east_wall_texture.img.inst);
+	mlx_destroy_image(game->mlx, game->west_wall_texture.img.inst);
 	mlx_destroy_window(game->mlx, game->win);
 	mlx_destroy_display(game->mlx);
 	free(game->mlx);
@@ -35,12 +39,11 @@ int	close_game(t_game *game)
 	return (0);
 }
 
-void	init_player(t_entity *player, t_entity defs)
+void	init_player(t_entity *player)
 {
 	/*A posição inicial será decidida consoante a coordenada dada no mapa*/
-	player->x = defs.x * BLOCK - BLOCK / 2;
-	player->y = defs.y * BLOCK - BLOCK / 2;
-	player->angle = defs.angle;
+	player->x = player->x * BLOCK - BLOCK / 2;
+	player->y = player->y * BLOCK - BLOCK / 2;
 	player->key_up = 0;
 	player->key_down = 0;
 	player->key_left = 0;
@@ -66,7 +69,7 @@ int	key_press(int keycode, t_entity *player)
 	return (0);
 }
 
-int	key_release(int keycode, t_game *game)
+int	key_release(int keycode, t_defs *game)
 {
 	if (keycode == W)
 		game->player.key_up = 0;
@@ -137,13 +140,11 @@ t_defs	temp_defs_init(void)
 	return (def);
 }
 
-char	init_game(t_game *game, t_defs def)
+char	init_game(t_defs *game)
 {
 	t_img	tmp;
 
-	init_player(&game->player, def.player);
-	game->map = def.map;
-	game->mlx = def.mlx;
+	init_player(&game->player);
 	if (!game->mlx)
 		return (0);
 	game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, "Game");
@@ -153,22 +154,21 @@ char	init_game(t_game *game, t_defs def)
 	if (!tmp.inst)
 		return (0);
 	tmp.data = mlx_get_data_addr(tmp.inst, &tmp.bpp, &tmp.len, &tmp.end);
-	game->img.data = tmp.data;
-	game->img.inst = tmp.inst;
-	game->img.bpp = tmp.bpp;
-	game->img.end = tmp.end;
-	game->img.len = tmp.len;
-	mlx_put_image_to_window(game->mlx, game->win, game->img.inst, 0, 0);
+	game->frame.data = tmp.data;
+	game->frame.inst = tmp.inst;
+	game->frame.bpp = tmp.bpp;
+	game->frame.end = tmp.end;
+	game->frame.len = tmp.len;
+	mlx_put_image_to_window(game->mlx, game->win, game->frame.inst, 0, 0);
 	return (1);
 }
 
 int	main(void)
 {
-	t_game	game;
-	t_defs	def;
+	t_defs	game;
 
-	def = temp_defs_init();
-	if (!init_game(&game, def))
+	game = temp_defs_init();
+	if (!init_game(&game))
 		return (1);
 	mlx_hook(game.win, 17, 0L, close_game, &game);
 	mlx_hook(game.win, 2, 1L << 0, key_press, &game.player);
@@ -177,6 +177,5 @@ int	main(void)
 	mlx_loop(game.mlx);
 /*	|***CONTINUE_HERE!!!***|
 		-adicionar texturas em todas as orientações de parede
-		-criar função que define a posição inicial do jogador consoante defs
 		-juntar parsing e execussão*/
 }

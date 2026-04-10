@@ -25,7 +25,7 @@ void	put_pixel(int x, int y, int color, t_img *img)
 	img->data[index + 2] = (color >> 16) & 0xFF;
 }
 
-void	draw_square(t_pos pos, int size, int color, t_game *game)
+void	draw_square(t_pos pos, int size, int color, t_defs *game)
 {
 	int	i;
 	int	j;
@@ -37,9 +37,9 @@ void	draw_square(t_pos pos, int size, int color, t_game *game)
 		while (++j < size)
 		{
 			if (i != 0 && j != 0 && i != (size - 1) && j != (size - 1))
-				put_pixel(pos.x + j, pos.y + i, color, &game->img);
+				put_pixel(pos.x + j, pos.y + i, color, &game->frame);
 			else
-				put_pixel(pos.x + j, pos.y + i, 0x474747, &game->img);
+				put_pixel(pos.x + j, pos.y + i, 0x474747, &game->frame);
 		}
 	}
 }

@@ -25,7 +25,7 @@
 
 #define PI 3.141592654
 
-#define DEBUG 1
+#define DEBUG 0
 
 typedef struct	s_entity
 {
@@ -58,15 +58,6 @@ typedef struct	s_img
 	int		end;
 }	t_img;
 
-typedef struct	s_game
-{
-	void		*mlx;
-	void		*win;
-	t_img		img;
-	t_entity	player;
-	t_map		map;
-} t_game;
-
 typedef struct	s_texture
 {
 	t_img	img;
@@ -83,6 +74,8 @@ typedef struct s_defs
 
 	 img.inst = mlx_xpm_file_to_image(mlx, "./path", &wall.width, &wall.height)*/
 	void		*mlx;
+	void		*win;
+	t_img		frame;
 	t_texture	north_wall_texture;
 	t_texture	south_wall_texture;
 	t_texture	west_wall_texture;
@@ -99,6 +92,6 @@ typedef struct s_defs
 int		valid_map(char *path, t_map *map);
 
 //	rendering/rendering.c
-int	draw_loop(t_game	*game);
+int	draw_loop(t_defs	*game);
 
 #endif
