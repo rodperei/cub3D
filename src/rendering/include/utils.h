@@ -22,7 +22,21 @@ typedef struct s_pos
 	int	y;
 }	t_pos;
 
+typedef struct	s_ray
+{
+	enum {
+		NORTH,
+		SOUTH,
+		WEST,
+		EAST
+	} orientation;
+	float	x;
+	float	y;
+	float	angle;
+}	t_ray;
+
 void	put_pixel(int x, int y, int color, t_img *img);
 void	draw_square(t_pos pos, int size, int color, t_game *game);
+float	distance(float x, float y);
 
 #endif

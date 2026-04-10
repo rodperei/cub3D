@@ -24,9 +24,9 @@ void	rotate_player(t_entity *player, float speed)
 	if (player->right_rotate)
 		player->angle += speed;
 	if (player->angle > 2 * PI)
-		player->angle = 0;
+		player->angle -= 2 * PI;
 	if (player->angle < 0)
-		player->angle = 2 * PI;
+		player->angle += 2 * PI;
 }
 
 t_grid	calc_offset(float pos, float angle, char opt)

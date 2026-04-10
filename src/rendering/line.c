@@ -33,14 +33,14 @@ float	fixed_distance(t_entity player, float x2, float y2)
 
 
 
-void	draw_3d(t_game *game, float ray_x, float ray_y, int i)
+void	draw_3d(t_game *game, t_ray ray, int i)
 {
 	int		j;
 	float	height;
 	int		start_y;
 	int		end;
 
-	height = (BLOCK / fixed_distance(game->player, ray_x, ray_y)) * (WIDTH / 2);
+	height = (BLOCK / fixed_distance(game->player, ray.x, ray.y)) * (WIDTH / 2);
 	start_y = (HEIGHT - height) / 2;
 	end = start_y + height;
 	j = -1;
@@ -59,14 +59,16 @@ void	draw_3d(t_game *game, float ray_x, float ray_y, int i)
 		put_pixel(i, start_y, 0xFF0000, &game->img);
 }
 
-char	touch(float px, float py, char **map)
+char	touch(float px, float py, t_map map)
 {
 	int	x;
 	int	y;
 
 	x = px / BLOCK;
 	y = py / BLOCK;
-	if (map[x][y] == '1')
+	if (x >= map.lines || y >= map.cols)
+		return (1);
+	if (map.map[x][y] == '1')
 		return (1);
 	return (0);
 }

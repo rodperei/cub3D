@@ -14,11 +14,13 @@
 # define RENDERING_H
 
 typedef struct s_game	t_game;
+typedef struct s_map	t_map;
 typedef struct s_entity	t_player;
+typedef struct s_ray	t_ray;
 
 // ../line.c
-void	draw_3d(t_game *game, float ray_x, float ray_y, int i);
-char	touch(float px, float py, char **map);
+void	draw_3d(t_game *game, t_ray ray, int i);
+char	touch(float px, float py, t_map map);
 
 // ../movement.c
 void	translate_vertical(t_game *game, int speed);
