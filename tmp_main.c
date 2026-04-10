@@ -35,12 +35,12 @@ int	close_game(t_game *game)
 	return (0);
 }
 
-void	init_player(t_entity *player)
+void	init_player(t_entity *player, t_entity defs)
 {
 	/*A posição inicial será decidida consoante a coordenada dada no mapa*/
-	player->x = 240;
-	player->y = 190;
-	player->angle = PI;
+	player->x = defs.x * BLOCK - BLOCK / 2;
+	player->y = defs.y * BLOCK - BLOCK / 2;
+	player->angle = defs.angle;
 	player->key_up = 0;
 	player->key_down = 0;
 	player->key_left = 0;
@@ -87,8 +87,6 @@ int	key_release(int keycode, t_game *game)
 
 t_map	get_map()
 {
-	/*No futuro, esta função será trocada pelo recebimento do mapa analizado
-	 na fase de parsing. Será apagado no final*/
 	t_map	ret;
 	char	**map = malloc(sizeof(char *) * 9);
 	char	tmp[8][9] = {"11111111",
@@ -113,13 +111,39 @@ t_map	get_map()
 	return (ret);
 }
 
-char	init_game(t_game *game)
+t_defs	temp_defs_init(void)
+{
+	t_defs	def;
+
+	def.mlx = mlx_init();
+	def.north_wall_texture.img.inst = mlx_xpm_file_to_image(def.mlx, "./textures/wall_texture.xpm", &def.north_wall_texture.width, &def.north_wall_texture.height);
+	def.north_wall_texture.img.data = mlx_get_data_addr(def.north_wall_texture.img.inst, &def.north_wall_texture.img.bpp, &def.north_wall_texture.img.len, &def.north_wall_texture.img.end);
+	def.south_wall_texture.img.inst = mlx_xpm_file_to_image(def.mlx, "./textures/wall_texture.xpm", &def.south_wall_texture.width, &def.south_wall_texture.height);
+	def.south_wall_texture.img.data = mlx_get_data_addr(def.south_wall_texture.img.inst, &def.south_wall_texture.img.bpp, &def.south_wall_texture.img.len, &def.south_wall_texture.img.end);
+	def.west_wall_texture.img.inst = mlx_xpm_file_to_image(def.mlx, "./textures/wall_texture.xpm", &def.west_wall_texture.width, &def.west_wall_texture.height);
+	def.west_wall_texture.img.data = mlx_get_data_addr(def.west_wall_texture.img.inst, &def.west_wall_texture.img.bpp, &def.west_wall_texture.img.len, &def.west_wall_texture.img.end);
+	def.east_wall_texture.img.inst = mlx_xpm_file_to_image(def.mlx, "./textures/wall_texture.xpm", &def.east_wall_texture.width, &def.east_wall_texture.height);
+	def.east_wall_texture.img.data = mlx_get_data_addr(def.east_wall_texture.img.inst, &def.east_wall_texture.img.bpp, &def.east_wall_texture.img.len, &def.east_wall_texture.img.end);
+	def.floor_color[0] = 0;
+	def.floor_color[1] = 0;
+	def.floor_color[2] = 255;
+	def.ceiling_color[0] = 255;
+	def.ceiling_color[1] = 0;
+	def.ceiling_color[2] = 0;
+	def.map = get_map();
+	def.player.x = 4;
+	def.player.y = 4;
+	def.player.angle = (3 * PI) / 2;
+	return (def);
+}
+
+char	init_game(t_game *game, t_defs def)
 {
 	t_img	tmp;
 
-	init_player(&game->player);
-	game->map = get_map();
-	game->mlx = mlx_init();
+	init_player(&game->player, def.player);
+	game->map = def.map;
+	game->mlx = def.mlx;
 	if (!game->mlx)
 		return (0);
 	game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, "Game");
@@ -141,8 +165,10 @@ char	init_game(t_game *game)
 int	main(void)
 {
 	t_game	game;
+	t_defs	def;
 
-	if (!init_game(&game))
+	def = temp_defs_init();
+	if (!init_game(&game, def))
 		return (1);
 	mlx_hook(game.win, 17, 0L, close_game, &game);
 	mlx_hook(game.win, 2, 1L << 0, key_press, &game.player);
