@@ -15,6 +15,7 @@
 
 typedef struct s_img	t_img;
 typedef struct s_defs	t_defs;
+typedef struct s_entity	t_entity;
 
 typedef struct s_pos
 {
@@ -22,14 +23,15 @@ typedef struct s_pos
 	int	y;
 }	t_pos;
 
-typedef struct	s_ray
+typedef struct s_ray
 {
-	enum {
+	enum
+	{
 		NORTH,
 		SOUTH,
 		WEST,
 		EAST
-	} orientation;
+	} e_orientation;
 	float	x;
 	float	y;
 	float	angle;
@@ -38,5 +40,6 @@ typedef struct	s_ray
 void	put_pixel(int x, int y, int color, t_img *img);
 void	draw_square(t_pos pos, int size, int color, t_defs *game);
 float	distance(float x, float y);
+float	fixed_distance(t_entity player, float x2, float y2);
 
 #endif

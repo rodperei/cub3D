@@ -31,16 +31,23 @@ DEP_DIR		:= $(BUILD_DIR)/deps
 			   $(SRC_DIR)/utils/utils_vec.c \
 				\
 			   $(TEST_DIR)/test_parsing.c
-SRCS		:=	$(SRC_DIR)/rendering/line.c \
+SRCS		:=	$(SRC_DIR)/initialization.c \
+				\
 				$(SRC_DIR)/rendering/movement.c \
 				$(SRC_DIR)/rendering/rendering.c \
 				$(SRC_DIR)/rendering/utils.c \
+				\
+				$(SRC_DIR)/rendering/raycasting/bresenham.c \
+				$(SRC_DIR)/rendering/raycasting/intersections.c \
+				$(SRC_DIR)/rendering/raycasting/projection.c \
+				$(SRC_DIR)/rendering/raycasting/texture.c \
+				\
 				$(SRC_DIR)/utils/utils_matriz.c \
 				$(SRC_DIR)/utils/utils_vec.c \
 				$(SRC_DIR)/utils/append.c \
 				$(SRC_DIR)/utils/lens.c \
 				\
-				./tmp_main.c 
+				./main.c 
 
 # Transforms src/file.c into build/objs/file.o
 OBJS		:= $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRCS))

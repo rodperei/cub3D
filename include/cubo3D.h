@@ -6,7 +6,7 @@
 /*   By: frnicola <frnicola@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 13:35:12 by frnicola          #+#    #+#             */
-/*   Updated: 2026/03/31 21:29:44 by rodperei         ###   ########.fr       */
+/*   Updated: 2026/04/12 00:38:44 by rodperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,10 @@ typedef struct s_defs
 
 }	t_defs;
 
-// parsing/parsing.c
+//	initialization.c
+char	init_game(t_defs *game);
+
+//	parsing/parsing.c
 int		valid_map(char *path, t_map *map);
 
 //	rendering/rendering.c

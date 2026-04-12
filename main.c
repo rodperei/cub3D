@@ -3,22 +3,141 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frnicola <frnicola@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: rodperei <rodperei@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/25 13:35:12 by frnicola          #+#    #+#             */
-/*   Updated: 2026/03/25 13:35:14 by frnicola         ###   ########.fr       */
+/*   Created: 2026/04/02 15:53:14 by rodperei          #+#    #+#             */
+/*   Updated: 2026/04/12 02:10:23 by rodperei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/Cubo3D.h"
+#include <stdlib.h>
+#include <cubo3D.h>
+#include "lib/minilibx-linux/mlx.h"
+#include "src/utils/utils.h"
 
-int	main(int argc, char **argv)
+#define W		119
+#define A		97
+#define S		115
+#define D		100
+#define LEFT	0xff51
+#define RIGHT	0xff53
+#define ESC		0xff1b
+
+static int	close_game(t_defs *game)
 {
-	if (argc != 2)
-	{
-		printf("Usage: %s <map_file>.cub\n", argv[0]);
-		return (1);
-	}
-	valid_map(argv[1]);
+	mlx_destroy_image(game->mlx, game->frame.inst);
+	mlx_destroy_image(game->mlx, game->north_wall_texture.img.inst);
+	mlx_destroy_image(game->mlx, game->south_wall_texture.img.inst);
+	mlx_destroy_image(game->mlx, game->east_wall_texture.img.inst);
+	mlx_destroy_image(game->mlx, game->west_wall_texture.img.inst);
+	mlx_destroy_window(game->mlx, game->win);
+	mlx_destroy_display(game->mlx);
+	free(game->mlx);
+	free_all(game->map.map);
+	exit(0);
 	return (0);
+}
+
+static int	key_press(int keycode, t_entity *player)
+{
+	if (keycode == W)
+		player->key_up = 1;
+	if (keycode == S)
+		player->key_down = 1;
+	if (keycode == A)
+		player->key_left = 1;
+	if (keycode == D)
+		player->key_right = 1;
+	if (keycode == LEFT)
+		player->left_rotate = 1;
+	if (keycode == RIGHT)
+		player->right_rotate = 1;
+	return (0);
+}
+
+static int	key_release(int keycode, t_defs *game)
+{
+	if (keycode == W)
+		game->player.key_up = 0;
+	if (keycode == S)
+		game->player.key_down = 0;
+	if (keycode == A)
+		game->player.key_left = 0;
+	if (keycode == D)
+		game->player.key_right = 0;
+	if (keycode == LEFT)
+		game->player.left_rotate = 0;
+	if (keycode == RIGHT)
+		game->player.right_rotate = 0;
+	if (keycode == ESC)
+		close_game(game);
+	return (0);
+}
+
+static t_map	get_map(void)
+{
+	t_map	ret;
+	char	**map = malloc(sizeof(char *) * 9);
+	char	tmp[8][9] = {"11111111",
+						 "10000001",
+						 "10000001",
+						 "10000001",
+						 "10000001",
+						 "10000001",
+						 "10000001",
+						 "11111111"};
+
+	for(int i = 0; i < 8; i++)
+	{
+		map[i] = malloc(sizeof(char) * 9);
+		for(int j = 0; j < 9; j++)
+			map[i][j] = tmp[j][i];
+	}
+	map[8] = 0;
+	ret.map = map;
+	ret.cols = 8;
+	ret.lines = 8;
+	return (ret);
+}
+
+static t_defs	temp_defs_init(void)
+{
+	t_defs	def;
+
+	def.mlx = mlx_init();
+	def.north_wall_texture.img.inst = mlx_xpm_file_to_image(def.mlx, "./textures/wall_texture.xpm", &def.north_wall_texture.width, &def.north_wall_texture.height);
+	def.north_wall_texture.img.data = mlx_get_data_addr(def.north_wall_texture.img.inst, &def.north_wall_texture.img.bpp, &def.north_wall_texture.img.len, &def.north_wall_texture.img.end);
+	def.south_wall_texture.img.inst = mlx_xpm_file_to_image(def.mlx, "./textures/wall_texture.xpm", &def.south_wall_texture.width, &def.south_wall_texture.height);
+	def.south_wall_texture.img.data = mlx_get_data_addr(def.south_wall_texture.img.inst, &def.south_wall_texture.img.bpp, &def.south_wall_texture.img.len, &def.south_wall_texture.img.end);
+	def.west_wall_texture.img.inst = mlx_xpm_file_to_image(def.mlx, "./textures/wall_texture.xpm", &def.west_wall_texture.width, &def.west_wall_texture.height);
+	def.west_wall_texture.img.data = mlx_get_data_addr(def.west_wall_texture.img.inst, &def.west_wall_texture.img.bpp, &def.west_wall_texture.img.len, &def.west_wall_texture.img.end);
+	def.east_wall_texture.img.inst = mlx_xpm_file_to_image(def.mlx, "./textures/wall_texture.xpm", &def.east_wall_texture.width, &def.east_wall_texture.height);
+	def.east_wall_texture.img.data = mlx_get_data_addr(def.east_wall_texture.img.inst, &def.east_wall_texture.img.bpp, &def.east_wall_texture.img.len, &def.east_wall_texture.img.end);
+	def.floor_color[0] = 126;
+	def.floor_color[1] = 204;
+	def.floor_color[2] = 92;
+	def.ceiling_color[0] = 103;
+	def.ceiling_color[1] = 195;
+	def.ceiling_color[2] = 224;
+	def.map = get_map();
+	def.player.x = 4;
+	def.player.y = 4;
+	def.player.angle = (3 * PI) / 2;
+	return (def);
+}
+
+int	main(void)
+{
+	t_defs	game;
+
+	game = temp_defs_init();
+	if (!init_game(&game))
+		return (1);
+	mlx_hook(game.win, 17, 0L, close_game, &game);
+	mlx_hook(game.win, 2, 1L << 0, key_press, &game.player);
+	mlx_hook(game.win, 3, 1L << 1, key_release, &game);
+	mlx_loop_hook(game.mlx, draw_loop, &game);
+	mlx_loop(game.mlx);
+/*	|***CONTINUE_HERE!!!***|
+		-juntar parsing e execussão*/
 }
