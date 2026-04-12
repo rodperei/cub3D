@@ -105,13 +105,13 @@ static t_defs	temp_defs_init(void)
 	t_defs	def;
 
 	def.mlx = mlx_init();
-	def.north_wall_texture.img.inst = mlx_xpm_file_to_image(def.mlx, "./textures/wall_texture.xpm", &def.north_wall_texture.width, &def.north_wall_texture.height);
+	def.north_wall_texture.img.inst = mlx_xpm_file_to_image(def.mlx, "./textures/ns_wall_texture.xpm", &def.north_wall_texture.width, &def.north_wall_texture.height);
 	def.north_wall_texture.img.data = mlx_get_data_addr(def.north_wall_texture.img.inst, &def.north_wall_texture.img.bpp, &def.north_wall_texture.img.len, &def.north_wall_texture.img.end);
-	def.south_wall_texture.img.inst = mlx_xpm_file_to_image(def.mlx, "./textures/wall_texture.xpm", &def.south_wall_texture.width, &def.south_wall_texture.height);
+	def.south_wall_texture.img.inst = mlx_xpm_file_to_image(def.mlx, "./textures/ns_wall_texture.xpm", &def.south_wall_texture.width, &def.south_wall_texture.height);
 	def.south_wall_texture.img.data = mlx_get_data_addr(def.south_wall_texture.img.inst, &def.south_wall_texture.img.bpp, &def.south_wall_texture.img.len, &def.south_wall_texture.img.end);
-	def.west_wall_texture.img.inst = mlx_xpm_file_to_image(def.mlx, "./textures/wall_texture.xpm", &def.west_wall_texture.width, &def.west_wall_texture.height);
+	def.west_wall_texture.img.inst = mlx_xpm_file_to_image(def.mlx, "./textures/we_wall_texture.xpm", &def.west_wall_texture.width, &def.west_wall_texture.height);
 	def.west_wall_texture.img.data = mlx_get_data_addr(def.west_wall_texture.img.inst, &def.west_wall_texture.img.bpp, &def.west_wall_texture.img.len, &def.west_wall_texture.img.end);
-	def.east_wall_texture.img.inst = mlx_xpm_file_to_image(def.mlx, "./textures/wall_texture.xpm", &def.east_wall_texture.width, &def.east_wall_texture.height);
+	def.east_wall_texture.img.inst = mlx_xpm_file_to_image(def.mlx, "./textures/we_wall_texture.xpm", &def.east_wall_texture.width, &def.east_wall_texture.height);
 	def.east_wall_texture.img.data = mlx_get_data_addr(def.east_wall_texture.img.inst, &def.east_wall_texture.img.bpp, &def.east_wall_texture.img.len, &def.east_wall_texture.img.end);
 	def.floor_color[0] = 126;
 	def.floor_color[1] = 204;
