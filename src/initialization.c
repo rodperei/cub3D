@@ -15,8 +15,8 @@
 
 static void	init_player(t_entity *player)
 {
-	player->x = player->x * BLOCK - BLOCK / 2.0;
-	player->y = player->y * BLOCK - BLOCK / 2.0;
+	player->x = (player->x + 1) * BLOCK - BLOCK / 2.0;
+	player->y = (player->y + 1) * BLOCK - BLOCK / 2.0;
 	player->key_up = 0;
 	player->key_down = 0;
 	player->key_left = 0;

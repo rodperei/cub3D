@@ -80,11 +80,11 @@ static t_map	get_map(void)
 	char	**map = malloc(sizeof(char *) * 9);
 	char	tmp[8][9] = {"11111111",
 						 "10000001",
+						 "11111001",
 						 "10000001",
-						 "10000001",
-						 "10000001",
-						 "10000001",
-						 "10000001",
+						 "10110001",
+						 "10010111",
+						 "10010001",
 						 "11111111"};
 
 	for(int i = 0; i < 8; i++)
@@ -120,8 +120,8 @@ static t_defs	temp_defs_init(void)
 	def.ceiling_color[1] = 195;
 	def.ceiling_color[2] = 224;
 	def.map = get_map();
-	def.player.x = 4;
-	def.player.y = 4;
+	def.player.x = 6;
+	def.player.y = 1;
 	def.player.angle = (3 * PI) / 2;
 	return (def);
 }
