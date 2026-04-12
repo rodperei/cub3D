@@ -59,3 +59,22 @@ int	include(char *str_long, char *str_small)
 	}
 	return (0);
 }
+
+char	*matriz_for_vec(char **matriz)
+{
+	char	*vec;
+	int		aux;
+	int		aux1;
+
+	vec = z_maloc(1);
+	aux = 0;
+	while (matriz && matriz[aux])
+	{
+		aux1 = 0;
+		while (matriz[aux][aux1])
+			aux1++;
+		vec = append(vec, aux1, matriz[aux]);
+		aux++;
+	}
+	return (vec);
+}

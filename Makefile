@@ -10,7 +10,6 @@ LDFLAGS		:= -L./lib/minilibx-linux/ -lmlx -lXext -lX11 -lm
 # Directory Structure
 # ==========================================
 SRC_DIR		:= src
-TEST_DIR	:= testes
 BUILD_DIR	:= build
 OBJ_DIR		:= $(BUILD_DIR)/objs
 DEP_DIR		:= $(BUILD_DIR)/deps
@@ -18,19 +17,6 @@ DEP_DIR		:= $(BUILD_DIR)/deps
 # ==========================================
 # Source & Object Discovery
 # ==========================================
-#SRCS		:= $(SRC_DIR)/parsing/parsing.c \
-			   $(SRC_DIR)/parsing/valid_1.c \
-				\
-			   $(SRC_DIR)/utils/append.c \
-			   $(SRC_DIR)/utils/death.c \
-			   $(SRC_DIR)/utils/ft_split.c \
-			   $(SRC_DIR)/utils/lens.c \
-			   $(SRC_DIR)/utils/read_file.c \
-			   $(SRC_DIR)/utils/string.c \
-			   $(SRC_DIR)/utils/utils_matriz.c \
-			   $(SRC_DIR)/utils/utils_vec.c \
-				\
-			   $(TEST_DIR)/test_parsing.c
 SRCS		:=	$(SRC_DIR)/initialization.c \
 				\
 				$(SRC_DIR)/rendering/movement.c \
@@ -42,12 +28,20 @@ SRCS		:=	$(SRC_DIR)/initialization.c \
 				$(SRC_DIR)/rendering/raycasting/projection.c \
 				$(SRC_DIR)/rendering/raycasting/texture.c \
 				\
+				$(SRC_DIR)/utils/death.c \
+				$(SRC_DIR)/utils/ft_split.c \
+				$(SRC_DIR)/utils/ft_split_not_replace.c \
+				$(SRC_DIR)/utils/read_file.c \
+				$(SRC_DIR)/utils/string.c \
 				$(SRC_DIR)/utils/utils_matriz.c \
 				$(SRC_DIR)/utils/utils_vec.c \
 				$(SRC_DIR)/utils/append.c \
 				$(SRC_DIR)/utils/lens.c \
 				\
-				./main.c 
+				$(SRC_DIR)/parsing/valid_1.c \
+				$(SRC_DIR)/parsing/valid_2.c \
+				$(SRC_DIR)/parsing/parsing.c \
+				./main.c
 
 # Transforms src/file.c into build/objs/file.o
 OBJS		:= $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRCS))
@@ -98,6 +92,6 @@ re: fclean all
 
 norm:
 	@echo "Running norminette..."
-	@norminette $(SRC_DIR) $(TEST_DIR) ./include
+	@norminette $(SRCS) ./include
 
 .PHONY: all clean fclean re norm

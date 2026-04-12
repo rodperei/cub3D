@@ -12,7 +12,7 @@
 
 #include "utils.h"
 
-char	**read_file(int fd, char c)
+char	**read_file(int fd)
 {
 	char	*text;
 	int		bit_read;
@@ -29,9 +29,31 @@ char	**read_file(int fd, char c)
 	}
 	close(fd);
 	free (buf);
-	text_split = ft_split(text, c);
+	text_split = &text;
+	text_split = ft_split(text, '\n');
 	free(text);
 	return (text_split);
+}
+
+char	*read_file_line(int fd)
+{
+	char	*text;
+	int		bit_read;
+	char	*buf;
+
+	buf = z_maloc(SIZE_BUF);
+	text = append(NULL, 1, buf);
+	bit_read = read(fd, buf, SIZE_BUF);
+	while (bit_read > 0)
+	{
+		text = append(text, bit_read, buf);
+		bit_read = read(fd, buf, SIZE_BUF);
+	}
+	if (text[strlen(text) - 1] != '\n')
+		text = append(text, 1, "\n");
+	close(fd);
+	free (buf);
+	return (text);
 }
 
 int	exist_file(char *path)

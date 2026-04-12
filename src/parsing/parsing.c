@@ -11,66 +11,10 @@
 /* ************************************************************************** */
 
 #include "parsing.h"
+#include "../../lib/minilibx-linux/mlx.h"
+#include "../../include/cubo3D.h"
 
-int	parse_color_line(char **lines, t_map *map)
-{
-	int		y;
-	char	**line;
-
-	y = -1;
-	while (++y <= len_all(lines))
-	{
-		line = ft_split(lines[y], ' ');
-		if (len_all(line) == 2)
-		{
-			if (equal(line[0], "F") && !parse_color(line[1], map->floor_color))
-			{
-				free_all(lines);
-				free_all(line);
-				death("Error\nInvalid floor color format", 1);
-			}
-			else if (equal(line[0], "C") \
-&& !parse_color(line[1], map->ceiling_color))
-			{
-				free_all(lines);
-				free_all(line);
-				death("Error\nInvalid ceiling color format", 1);
-			}
-		}
-		free_all(line);
-	}
-	return (1);
-}
-
-int	parse_path(char **lines, t_map *map)
-{
-	int		x;
-	int		y;
-	char	**line;
-
-	x = 0;
-	y = 0;
-	while (y <= len_all(lines))
-	{
-		line = ft_split(lines[y], ' ');
-		if (len_all(line) == 2)
-		{
-			if (equal(line[0], "NO"))
-				strcpy(map->north_wall_texture, line[1]);
-			else if (equal(line[0], "SO"))
-				strcpy(map->south_wall_texture, line[1]);
-			else if (equal(line[0], "WE"))
-				strcpy(map->west_wall_texture, line[1]);
-			else if (equal(line[0], "EA"))
-				strcpy(map->east_wall_texture, line[1]);
-		}
-		free_all(line);
-		y++;
-	}
-	return (1);
-}
-
-int	valid_map(char *path, t_map	*map)
+void	valid_params(char *path, t_defs *game)
 {
 	char	**lines;
 
@@ -78,12 +22,38 @@ int	valid_map(char *path, t_map	*map)
 		death("Error\nInvalid file extension. Expected .cub", 1);
 	if (!exist_file(path))
 		death("Error\nFailed to open file", 1);
-	lines = read_file(open(path, O_RDONLY), '\n');
+	lines = read_file(open(path, O_RDONLY));
 	if (!lines)
 		death("Error\nFailed to read file", 1);
-	parse_path(lines, map);
-	parse_color_line(lines, map);
+	parse_path(lines, game);
+	parse_color_line(lines, game);
 	free_all(lines);
-	check_path(map);
-	return (1);
+	check_path(game);
+	game->mlx = mlx_init();
+	load_images(game);
+}
+
+void	valid_map(char *path, t_defs *game)
+{
+	char	**lines;
+	char	*line;
+
+	line = read_file_line(open(path, O_RDONLY));
+	lines = ft_split_not_replace(line, '\n');
+	free(line);
+	lines = clean_file_only_map(lines);
+	if (!parsing_map_eliminate_new_line(lines) || !check_caracter_map(lines))
+	{
+		free_all(lines);
+		close_game(game);
+	}
+	print_lines(lines);
+	free_all(lines);
+}
+
+t_defs	parsing(char *path, t_defs *game)
+{
+	valid_params(path, game);
+	valid_map(path, game);
+	return (*game);
 }

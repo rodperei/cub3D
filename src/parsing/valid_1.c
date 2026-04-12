@@ -59,14 +59,70 @@ int	parse_color(char *str, int *color)
 	return (1);
 }
 
-void	check_path(t_map *map)
+void	check_path(t_defs *def)
 {
-	if (!exist_file(map->north_wall_texture))
+	if (!exist_file(def->nw_tex.path))
 		death("Error\nNorth wall texture file does not exist", 1);
-	if (!exist_file(map->south_wall_texture))
+	if (!exist_file(def->sw_tex.path))
 		death("Error\nSouth wall texture file does not exist", 1);
-	if (!exist_file(map->west_wall_texture))
+	if (!exist_file(def->ww_tex.path))
 		death("Error\nWest wall texture file does not exist", 1);
-	if (!exist_file(map->east_wall_texture))
+	if (!exist_file(def->ew_tex.path))
 		death("Error\nEast wall texture file does not exist", 1);
+}
+
+int	parse_color_line(char **lines, t_defs *def)
+{
+	int		y;
+	char	**line;
+
+	y = -1;
+	while (++y <= len_all(lines))
+	{
+		line = ft_split_is_space(lines[y]);
+		if (len_all(line) == 2)
+		{
+			if (equal(line[0], "F") && !parse_color(line[1], def->floor_color))
+			{
+				free_all(lines);
+				free_all(line);
+				death("Error\nInvalid floor color format", 1);
+			}
+			if (equal(line[0], "C") \
+&& !parse_color(line[1], def->ceiling_color))
+			{
+				free_all(lines);
+				free_all(line);
+				death("Error\nInvalid ceiling color format", 1);
+			}
+		}
+		free_all(line);
+	}
+	return (1);
+}
+
+int	parse_path(char **lines, t_defs *def)
+{
+	int		y;
+	char	**line;
+
+	y = 0;
+	while (y <= len_all(lines))
+	{
+		line = ft_split_is_space(lines[y]);
+		if (len_all(line) == 2)
+		{
+			if (equal(line[0], "NO"))
+				strcpy(def->nw_tex.path, line[1]);
+			else if (equal(line[0], "SO"))
+				strcpy(def->sw_tex.path, line[1]);
+			else if (equal(line[0], "WE"))
+				strcpy(def->ww_tex.path, line[1]);
+			else if (equal(line[0], "EA"))
+				strcpy(def->ew_tex.path, line[1]);
+		}
+		free_all(line);
+		y++;
+	}
+	return (1);
 }

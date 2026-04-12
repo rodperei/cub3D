@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   ft_split_not_replace.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frnicola <frnicola@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "utils.h"
 
-int	cont_words(char *str, char C)
+int	cont_words_not_replace(char *str, char C)
 {
 	int	cant;
 	int	aux;
@@ -31,7 +31,7 @@ int	cont_words(char *str, char C)
 	return (cant);
 }
 
-int	cont_letter(char *str, char C)
+int	cont_letter_not_replace(char *str, char C)
 {
 	int	cant;
 	int	aux;
@@ -45,10 +45,10 @@ int	cont_letter(char *str, char C)
 		cant++;
 		aux++;
 	}
-	return (cant);
+	return (aux + 1);
 }
 
-char	**ft_split(char *str, char C)
+char	**ft_split_not_replace(char *str, char C)
 {
 	char	**result;
 	int		cant;
@@ -56,43 +56,20 @@ char	**ft_split(char *str, char C)
 	int		aux1;
 	int		letter;
 
-	cant = cont_words(str, C);
+	cant = cont_words_not_replace(str, C);
 	aux = 0;
 	letter = 0;
 	result = malloc((1 + cant) * sizeof(char *));
 	while (cant != aux)
 	{
-		letter = cont_letter(str, C);
-		result[aux] = malloc(letter * sizeof(char) + 1);
+		letter = cont_letter_not_replace(str, C);
+		result[aux] = malloc(letter * (sizeof(char) + 1));
 		aux1 = 0;
-		while (*str == C)
-			str++;
 		while (letter != aux1)
 			result[aux][aux1++] = *(str++);
 		result[aux][aux1] = '\0';
 		aux++;
 	}
 	result[aux] = NULL;
-	return (result);
-}
-
-char	**ft_split_is_space(char *str)
-{
-	int		aux;
-	char	*tem;
-	char	**result;
-
-	aux = 0;
-	if (!str)
-		return (NULL);
-	tem = copy_vec(str);
-	while (tem && tem[aux] && (size_t)aux < strlen(tem))
-	{
-		if (is_space(tem[aux]))
-			tem[aux] = ' ';
-		aux++;
-	}
-	result = ft_split(tem, ' ');
-	free(tem);
 	return (result);
 }

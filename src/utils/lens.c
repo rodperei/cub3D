@@ -53,3 +53,19 @@ int	equaln(char *str, char *str1, int size)
 	}
 	return (1);
 }
+
+int	contains(char *str, char C)
+{
+	int	aux;
+	int	cant;
+
+	cant = 0;
+	aux = 0;
+	while (str[aux])
+	{
+		if (str[aux] == C)
+			cant++;
+		aux++;
+	}
+	return (cant);
+}

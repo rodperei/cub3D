@@ -10,8 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cubo3D.h>
+#include "../include/cubo3D.h"
 #include "../lib/minilibx-linux/mlx.h"
+#include "./utils/utils.h"
 
 static void	init_player(t_entity *player)
 {
@@ -46,4 +47,40 @@ char	init_game(t_defs *game)
 	game->frame.len = tmp.len;
 	mlx_put_image_to_window(game->mlx, game->win, game->frame.inst, 0, 0);
 	return (1);
+}
+
+int	close_game(t_defs *game)
+{
+	if (game->frame.inst)
+		mlx_destroy_image(game->mlx, game->frame.inst);
+	if (game->nw_tex.img.inst)
+		mlx_destroy_image(game->mlx, game->nw_tex.img.inst);
+	if (game->sw_tex.img.inst)
+		mlx_destroy_image(game->mlx, game->sw_tex.img.inst);
+	if (game->ew_tex.img.inst)
+		mlx_destroy_image(game->mlx, game->ew_tex.img.inst);
+	if (game->ww_tex.img.inst)
+		mlx_destroy_image(game->mlx, game->ww_tex.img.inst);
+	if (game->win)
+		mlx_destroy_window(game->mlx, game->win);
+	if (game->mlx)
+		mlx_destroy_display(game->mlx);
+	if (game->mlx)
+		free(game->mlx);
+	if (game->map.map)
+		free_all(game->map.map);
+	exit(0);
+	return (0);
+}
+
+void	init_value_game(t_defs *def)
+{
+	def->mlx = NULL;
+	def->win = NULL;
+	def->frame.inst = NULL;
+	def->nw_tex.img.inst = NULL;
+	def->sw_tex.img.inst = NULL;
+	def->ww_tex.img.inst = NULL;
+	def->ew_tex.img.inst = NULL;
+	def->map.map = NULL;
 }

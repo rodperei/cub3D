@@ -48,16 +48,16 @@ char	*copy_vec(char *str)
 	int		aux;
 
 	x = strlen((const char *)str);
-	result = malloc((x + 1) * sizeof(char));
+	result = z_maloc(x + 1);
 	if (!result)
 		return (NULL);
 	aux = 0;
-	while (aux != x)
+	while (str[aux])
 	{
 		result[aux] = str[aux];
 		aux++;
 	}
-	result[aux] = '\0';
+	result[aux] = str[aux];
 	return (result);
 }
 
@@ -80,4 +80,52 @@ char	**append_matriz(char **matriz, char *new_line)
 	if (matriz)
 		free_all(matriz);
 	return (result);
+}
+
+char	*append_index(char *vec, char *append, int index_init)
+{
+	char	*new;
+	int		aux;
+	int		aux1;
+	int		aux3;
+
+	aux = -1;
+	aux1 = -1;
+	if (vec == NULL)
+		vec = z_maloc(strlen(append) + 1);
+	new = z_maloc(strlen(vec) + strlen(append) + 1);
+	while (++aux != -1 && vec && vec[aux] && ++aux1 != -1)
+	{
+		aux3 = 0;
+		if (aux != index_init)
+			new[aux1] = vec[aux];
+		else
+		{
+			while (aux != index_init && (size_t)aux3 != strlen(append))
+				new[aux1++] = append[aux3++];
+			aux1--;
+			aux++;
+		}
+	}
+	return (new);
+}
+
+char	*pop_first_caracter(char *vec, char C)
+{
+	char	*new;
+	int		aux;
+	int		aux1;
+
+	aux = 0;
+	aux1 = 0;
+	if (!vec)
+		return (NULL);
+	new = z_maloc(strlen(vec) + 1);
+	while (vec && vec[aux] && vec[aux] == C)
+		aux++;
+	while (vec && vec[aux])
+		new[aux1++] = vec[aux++];
+	new[aux1] = '\0';
+	free(vec);
+	return (new);
 }

@@ -38,13 +38,13 @@ int	calculate_texture_x(t_texture tex, t_ray ray)
 t_texture	choose_texture(t_defs game, t_ray ray)
 {
 	if (ray.e_orientation == NORTH)
-		return (game.north_wall_texture);
+		return (game.nw_tex);
 	else if (ray.e_orientation == SOUTH)
-		return (game.south_wall_texture);
+		return (game.sw_tex);
 	else if (ray.e_orientation == WEST)
-		return (game.west_wall_texture);
+		return (game.ww_tex);
 	else
-		return (game.east_wall_texture);
+		return (game.ew_tex);
 }
 
 float	calc_texture_y(t_entity player, t_texture tex, t_ray ray, float *step)

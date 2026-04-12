@@ -11,32 +11,9 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include <cubo3D.h>
+#include "./include/cubo3D.h"
 #include "lib/minilibx-linux/mlx.h"
-#include "src/utils/utils.h"
-
-#define W		119
-#define A		97
-#define S		115
-#define D		100
-#define LEFT	0xff51
-#define RIGHT	0xff53
-#define ESC		0xff1b
-
-static int	close_game(t_defs *game)
-{
-	mlx_destroy_image(game->mlx, game->frame.inst);
-	mlx_destroy_image(game->mlx, game->north_wall_texture.img.inst);
-	mlx_destroy_image(game->mlx, game->south_wall_texture.img.inst);
-	mlx_destroy_image(game->mlx, game->east_wall_texture.img.inst);
-	mlx_destroy_image(game->mlx, game->west_wall_texture.img.inst);
-	mlx_destroy_window(game->mlx, game->win);
-	mlx_destroy_display(game->mlx);
-	free(game->mlx);
-	free_all(game->map.map);
-	exit(0);
-	return (0);
-}
+#include "src/parsing/parsing.h"
 
 static int	key_press(int keycode, t_entity *player)
 {
@@ -74,63 +51,16 @@ static int	key_release(int keycode, t_defs *game)
 	return (0);
 }
 
-static t_map	get_map(void)
-{
-	t_map	ret;
-	char	**map = malloc(sizeof(char *) * 9);
-	char	tmp[8][9] = {"11111111",
-						 "10000001",
-						 "11111001",
-						 "10000001",
-						 "10110001",
-						 "10010111",
-						 "10010001",
-						 "11111111"};
-
-	for(int i = 0; i < 8; i++)
-	{
-		map[i] = malloc(sizeof(char) * 9);
-		for(int j = 0; j < 9; j++)
-			map[i][j] = tmp[j][i];
-	}
-	map[8] = 0;
-	ret.map = map;
-	ret.cols = 8;
-	ret.lines = 8;
-	return (ret);
-}
-
-static t_defs	temp_defs_init(void)
-{
-	t_defs	def;
-
-	def.mlx = mlx_init();
-	def.north_wall_texture.img.inst = mlx_xpm_file_to_image(def.mlx, "./textures/ns_wall_texture.xpm", &def.north_wall_texture.width, &def.north_wall_texture.height);
-	def.north_wall_texture.img.data = mlx_get_data_addr(def.north_wall_texture.img.inst, &def.north_wall_texture.img.bpp, &def.north_wall_texture.img.len, &def.north_wall_texture.img.end);
-	def.south_wall_texture.img.inst = mlx_xpm_file_to_image(def.mlx, "./textures/ns_wall_texture.xpm", &def.south_wall_texture.width, &def.south_wall_texture.height);
-	def.south_wall_texture.img.data = mlx_get_data_addr(def.south_wall_texture.img.inst, &def.south_wall_texture.img.bpp, &def.south_wall_texture.img.len, &def.south_wall_texture.img.end);
-	def.west_wall_texture.img.inst = mlx_xpm_file_to_image(def.mlx, "./textures/we_wall_texture.xpm", &def.west_wall_texture.width, &def.west_wall_texture.height);
-	def.west_wall_texture.img.data = mlx_get_data_addr(def.west_wall_texture.img.inst, &def.west_wall_texture.img.bpp, &def.west_wall_texture.img.len, &def.west_wall_texture.img.end);
-	def.east_wall_texture.img.inst = mlx_xpm_file_to_image(def.mlx, "./textures/we_wall_texture.xpm", &def.east_wall_texture.width, &def.east_wall_texture.height);
-	def.east_wall_texture.img.data = mlx_get_data_addr(def.east_wall_texture.img.inst, &def.east_wall_texture.img.bpp, &def.east_wall_texture.img.len, &def.east_wall_texture.img.end);
-	def.floor_color[0] = 126;
-	def.floor_color[1] = 204;
-	def.floor_color[2] = 92;
-	def.ceiling_color[0] = 103;
-	def.ceiling_color[1] = 195;
-	def.ceiling_color[2] = 224;
-	def.map = get_map();
-	def.player.x = 6;
-	def.player.y = 1;
-	def.player.angle = (3 * PI) / 2;
-	return (def);
-}
-
-int	main(void)
+int	main(int argc, char **argv)
 {
 	t_defs	game;
 
-	game = temp_defs_init();
+	if (argc != 2)
+		death("Error:\nUsage: ./cubo3D <map.cub>", 2);
+	init_value_game(&game);
+	parsing(argv[1], &game);
+	close_game(&game);
+	return (1);
 	if (!init_game(&game))
 		return (1);
 	mlx_hook(game.win, 17, 0L, close_game, &game);
@@ -138,6 +68,4 @@ int	main(void)
 	mlx_hook(game.win, 3, 1L << 1, key_release, &game);
 	mlx_loop_hook(game.mlx, draw_loop, &game);
 	mlx_loop(game.mlx);
-/*	|***CONTINUE_HERE!!!***|
-		-juntar parsing e execussão*/
 }

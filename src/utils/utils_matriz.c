@@ -95,11 +95,20 @@ void	free_all(char **matriz)
 void	print_lines(char **matriz)
 {
 	int	i;
+	int	j;
 
 	i = 0;
 	while (matriz[i])
 	{
-		printf("%s\n", matriz[i]);
+		j = 0;
+		while (matriz[i][j])
+		{
+			if (matriz[i][j] != '\n')
+				printf("%c", matriz[i][j]);
+			else
+				printf("%c", matriz[i][j]);
+			j++;
+		}
 		i++;
 	}
 }

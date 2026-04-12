@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cubo3D.h>
+#include "../../include/cubo3D.h"
 #include "include/rendering.h"
 #include "include/utils.h"
 #include "../../lib/minilibx-linux/mlx.h"

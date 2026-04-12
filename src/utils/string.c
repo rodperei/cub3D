@@ -14,7 +14,18 @@
 
 int	is_space(char c)
 {
-	return (c == ' ' || c == '\t' || c == '\n' || c == '\f');
+	return (c == ' ' || c == '\t' || c == '\f' || c == '\r' || c == '\v');
+}
+
+int	is_all_space(char *c)
+{
+	while (*c)
+	{
+		if (!is_space(*c))
+			return (0);
+		c++;
+	}
+	return (1);
 }
 
 int	is_digit(char *c)
