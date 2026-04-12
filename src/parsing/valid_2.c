@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   valid_1.c                                          :+:      :+:    :+:   */
+/*   valid_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frnicola <frnicola@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -98,7 +98,7 @@ int	parsing_map_eliminate_new_line(char **ls)
 	return (1);
 }
 
-int		space_map(char **lines)
+int	space_map(char **lines)
 {
 	int		y;
 
@@ -114,7 +114,7 @@ int		space_map(char **lines)
 	return (1);
 }
 
-int check_caracter_map(char **lines)
+int	check_caracter_map(char **lines)
 {
 	int		y;
 	int		j;

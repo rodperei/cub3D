@@ -47,8 +47,12 @@ void	valid_map(char *path, t_defs *game)
 		free_all(lines);
 		close_game(game);
 	}
-	print_lines(lines);
-	free_all(lines);
+	game->map.map = lines;
+	if (!shear_player(game))
+	{
+		printf("Error:\nPlayer not found in the map\n");
+		close_game(game);
+	}
 }
 
 t_defs	parsing(char *path, t_defs *game)

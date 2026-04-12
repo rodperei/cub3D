@@ -40,6 +40,7 @@ SRCS		:=	$(SRC_DIR)/initialization.c \
 				\
 				$(SRC_DIR)/parsing/valid_1.c \
 				$(SRC_DIR)/parsing/valid_2.c \
+				$(SRC_DIR)/parsing/valid_3.c \
 				$(SRC_DIR)/parsing/parsing.c \
 				./main.c
 

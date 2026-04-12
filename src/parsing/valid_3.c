@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                             :+:      :+:    :+:   */
+/*   valid_3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frnicola <frnicola@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,36 +10,43 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
+#include "parsing.h"
 
-# include "../../include/cubo3D.h"
-# include "../utils/utils.h"
+void	orientation_player(t_entity *player, char c)
+{
+	if (c == 'N')
+		player->angle = NORT_RAD;
+	else if (c == 'S')
+		player->angle = SOUTH_RAD;
+	else if (c == 'E')
+		player->angle = EAST_RAD;
+	else if (c == 'O')
+		player->angle = WEST_RAD;
+}
 
-# define WALL '1'
-# define FLOOR '0'
-# define SPACE ' '
+int	shear_player(t_defs *game)
+{
+	int		y;
+	int		x;
+	char	c;
+	char	**map;
 
-# define NORT_RAD PI / 2
-# define SOUTH_RAD (3 * PI) / 2
-# define EAST_RAD 0
-# define WEST_RAD PI
-
-// valid_1.c
-int		check_ext(char *path);
-int		parse_color(char *str, int *color);
-int		parse_path(char **lines, t_defs *def);
-int		parse_color_line(char **lines, t_defs *def);
-void	check_path(t_defs *def);
-
-// valid_2.c
-void	load_images(t_defs *def);
-char	**clean_file_only_map(char **lines);
-int		parsing_map_eliminate_new_line(char **l);
-int		check_caracter_map(char **lines);
-int		space_map(char **lines);
-
-// valid_3.c
-int		shear_player(t_defs *game);
-
-#endif
+	y = -1;
+	map = game->map.map;
+	while (++y != len_all(map))
+	{
+		x = -1;
+		while (map[y] && (size_t)++x != strlen(map[y]))
+		{
+			c = map[y][x];
+			if (c == 'N' || c == 'S' || c == 'E' || c == 'O')
+			{
+				game->player.x = x;
+				game->player.y = y;
+				orientation_player(&game->player, c);
+				return (1);
+			}
+		}
+	}
+	return (0);
+}

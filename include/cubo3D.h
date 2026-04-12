@@ -59,7 +59,7 @@ typedef struct	s_map
 
 typedef struct	s_img
 {
-	void	*inst; // instância
+	void	*inst;
 	char	*data;
 	int		bpp;
 	int		len;
@@ -76,12 +76,6 @@ typedef struct	s_texture
 
 typedef struct s_defs
 {
-	/*
-	t_img img;
-	t_texture wall;
-
-	img.inst = mlx_xpm_file_to_image(mlx, "./path", &wall.width, &wall.height)
-	*/
 	void		*mlx;
 	void		*win;
 	t_img		frame;

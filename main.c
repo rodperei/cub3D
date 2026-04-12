@@ -59,8 +59,6 @@ int	main(int argc, char **argv)
 		death("Error:\nUsage: ./cubo3D <map.cub>", 2);
 	init_value_game(&game);
 	parsing(argv[1], &game);
-	close_game(&game);
-	return (1);
 	if (!init_game(&game))
 		return (1);
 	mlx_hook(game.win, 17, 0L, close_game, &game);
