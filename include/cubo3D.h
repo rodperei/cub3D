@@ -19,23 +19,23 @@
 # include <unistd.h>
 # include <fcntl.h>
 
-#define WIDTH	1280
-#define HEIGHT	720
-#define BLOCK	64
+# define WIDTH	1280
+# define HEIGHT	720
+# define BLOCK	64
 
-#define PI 3.141592654
+# define PI 3.141592654
 
-#define DEBUG 0
+# define DEBUG 0
 
-#define W		119
-#define A		97
-#define S		115
-#define D		100
-#define LEFT	0xff51
-#define RIGHT	0xff53
-#define ESC		0xff1b
+# define W		119
+# define A		97
+# define S		115
+# define D		100
+# define LEFT	0xff51
+# define RIGHT	0xff53
+# define ESC		0xff1b
 
-typedef struct	s_entity
+typedef struct s_entity
 {
 	float	x;
 	float	y;
@@ -50,14 +50,14 @@ typedef struct	s_entity
 	char	right_rotate;
 }	t_entity;
 
-typedef struct	s_map
+typedef struct s_map
 {
 	char	**map;
 	int		lines;
 	int		cols;
 }	t_map;
 
-typedef struct	s_img
+typedef struct s_img
 {
 	void	*inst;
 	char	*data;
@@ -66,7 +66,7 @@ typedef struct	s_img
 	int		end;
 }	t_img;
 
-typedef struct	s_texture
+typedef struct s_texture
 {
 	t_img	img;
 	int		width;
@@ -97,9 +97,9 @@ void	init_value_game(t_defs *def);
 int		close_game(t_defs *game);
 
 // parsing.c
-t_defs parsing(char *path, t_defs *game);
+t_defs	parsing(char *path, t_defs *game);
 
 //	rendering/rendering.c
-int	draw_loop(t_defs	*game);
+int		draw_loop(t_defs	*game);
 
 #endif
