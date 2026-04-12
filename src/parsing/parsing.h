@@ -41,5 +41,7 @@ int		space_map(char **lines);
 
 // valid_3.c
 int		shear_player(t_defs *game);
+void	load_map(t_defs *game, char **lines);
+void	orientation_player(t_entity *player, char c);
 
 #endif

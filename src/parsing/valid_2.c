@@ -23,6 +23,18 @@ void	load_images(t_defs *def)
 &def->ww_tex.width, &def->ww_tex.height);
 	def->ew_tex.img.inst = mlx_xpm_file_to_image(def->mlx, def->ew_tex.path, \
 &def->ew_tex.width, &def->ew_tex.height);
+	if (def->nw_tex.img.inst)
+		def->nw_tex.img.data = mlx_get_data_addr(def->nw_tex.img.inst, \
+		&def->nw_tex.img.bpp, &def->nw_tex.img.len, &def->nw_tex.img.end);
+	if (def->sw_tex.img.inst)
+		def->sw_tex.img.data = mlx_get_data_addr(def->sw_tex.img.inst, \
+		&def->sw_tex.img.bpp, &def->sw_tex.img.len, &def->sw_tex.img.end);
+	if (def->ww_tex.img.inst)
+		def->ww_tex.img.data = mlx_get_data_addr(def->ww_tex.img.inst, \
+		&def->ww_tex.img.bpp, &def->ww_tex.img.len, &def->ww_tex.img.end);
+	if (def->ew_tex.img.inst)
+		def->ew_tex.img.data = mlx_get_data_addr(def->ew_tex.img.inst, \
+		&def->ew_tex.img.bpp, &def->ew_tex.img.len, &def->ew_tex.img.end);
 	if (!def->nw_tex.img.inst)
 		printf("Error\nFailed to load north texture\n");
 	if (!def->sw_tex.img.inst)
