@@ -21,7 +21,7 @@ typedef struct s_ray	t_ray;
 //	../bresenham.c
 void	draw_line(t_defs *game, t_ray ray, int color);
 
-//	../line.c
+//	../raycasting/projection.c
 void	draw_3d(t_defs *game, t_ray ray, int i);
 
 //	../movement.c

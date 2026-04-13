@@ -33,16 +33,16 @@ int	cont_words_not_replace(char *str, char C)
 
 int	cont_letter_not_replace(char *str, char C)
 {
-	int	cant;
+	//int	cant;
 	int	aux;
 
-	cant = 0;
+	//cant = 0;
 	aux = 0;
 	while (str[aux] == C)
 		aux++;
 	while (str[aux] != C && str[aux])
 	{
-		cant++;
+		//cant++;
 		aux++;
 	}
 	return (aux + 1);

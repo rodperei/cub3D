@@ -59,7 +59,7 @@ t_ray	calc_horizontal_isect(t_defs game, float angle)
 	else
 		y_step = -BLOCK;
 	x_step = -y_step * (-1 / tanf(angle));
-	while (ix.x >= 0 && ix.x <= WIDTH && ix.y >= 0 && ix.y <= HEIGHT)
+	while (ix.x >= 0 && ix.y >= 0)
 	{
 		if (touch(ix.x, ix.y, game.map))
 			break ;
@@ -97,7 +97,7 @@ t_ray	calc_vertical_isect(t_defs game, float angle)
 	else
 		x_step = BLOCK;
 	y_step = -x_step * -tanf(angle);
-	while (ix.x >= 0 && ix.x <= WIDTH && ix.y >= 0 && ix.y <= HEIGHT)
+	while (ix.x >= 0 && ix.y >= 0)
 	{
 		if (touch(ix.x, ix.y, game.map))
 			break ;
