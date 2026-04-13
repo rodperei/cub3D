@@ -17,11 +17,13 @@
 
 static void	move_player(t_defs *game)
 {
-	int		speed;
-	float	angle_speed;
+	int						speed;
+	float					angle_speed;
+	int						modifier;
 
-	speed = 3;
-	angle_speed = 0.03;
+	modifier = calc_elapsed_time();
+	speed = 0.2 * modifier + 5;
+	angle_speed = 0.04 * modifier;
 	rotate_player(&game->player, angle_speed);
 	translate_vertical(game, speed);
 	translate_horizontal(game, speed);

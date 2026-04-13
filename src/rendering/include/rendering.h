@@ -25,6 +25,7 @@ void	draw_line(t_defs *game, t_ray ray, int color);
 void	draw_3d(t_defs *game, t_ray ray, int i);
 
 //	../movement.c
+int		calc_elapsed_time(void);
 void	translate_vertical(t_defs *game, int speed);
 void	translate_horizontal(t_defs *game, int speed);
 void	rotate_player(t_player *player, float speed);

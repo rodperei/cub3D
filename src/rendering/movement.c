@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <sys/time.h>
 #include <math.h>
 #include <cubo3D.h>
 #include "include/movement.h"
@@ -94,4 +95,18 @@ void	translate_horizontal(t_defs *game, int speed)
 		if (game->map.map[x.pos][y.add_pos] == '0')
 			player->y += sinf(player->angle + PI / 2) * speed;
 	}
+}
+
+int	calc_elapsed_time(void)
+{
+	static struct timeval	t_stamp = {0, 0};
+	struct timeval			curr;
+	int						ret;
+
+	gettimeofday(&curr, NULL);
+	ret = (curr.tv_sec - t_stamp.tv_sec) * 1000;
+	ret += curr.tv_usec - t_stamp.tv_usec;
+	if (ret <= 0 || ret > 5)
+		ret = 1;
+	return (ret);
 }
