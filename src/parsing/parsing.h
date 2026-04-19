@@ -22,8 +22,8 @@
 
 # define NORT_RAD PI / 2
 # define SOUTH_RAD (3 * PI) / 2
-# define EAST_RAD 0
-# define WEST_RAD PI
+# define EAST_RAD PI 
+# define WEST_RAD 0
 
 // valid_1.c
 int		check_ext(char *path);
@@ -37,7 +37,6 @@ void	load_images(t_defs *def);
 char	**clean_file_only_map(char **lines);
 int		parsing_map_eliminate_new_line(char **l);
 int		check_caracter_map(char **lines);
-int		space_map(char **lines);
 
 // valid_3.c
 int		shear_player(t_defs *game);

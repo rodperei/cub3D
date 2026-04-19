@@ -33,7 +33,7 @@ void	valid_params(char *path, t_defs *game)
 	load_images(game);
 }
 
-void	valid_map(char *path, t_defs *game)
+void	valid_map_1(char *path, t_defs *game)
 {
 	char	**lines;
 	char	*line;
@@ -48,6 +48,10 @@ void	valid_map(char *path, t_defs *game)
 		close_game(game);
 	}
 	load_map(game, lines);
+}
+
+void	valid_map_2(t_defs *game)
+{
 	if (valid_caracters(game) != 1)
 	{
 		printf("Error:\nInvalid characters in the map\n");
@@ -78,6 +82,7 @@ void	valid_map(char *path, t_defs *game)
 t_defs	parsing(char *path, t_defs *game)
 {
 	valid_params(path, game);
-	valid_map(path, game);
+	valid_map_1(path, game);
+	valid_map_2(game);
 	return (*game);
 }

@@ -1,0 +1,11 @@
+NO ./maps/xpm/n.xpm
+SO ./maps/xpm/s.xpm
+WE ./maps/xpm/w.xpm
+EA ./maps/xpm/e.xpm
+F 220,100,0
+C 225,30,0
+
+11111
+1N0S1
+10001
+11111

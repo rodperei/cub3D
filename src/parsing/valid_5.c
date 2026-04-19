@@ -19,7 +19,6 @@ int	player_in_map(t_defs *game)
 
 	y = game->player.x;
 	x = game->player.y;
-
 	if (up(game->map.map, y, x) == ' ' || down(game->map.map, y, x) == ' ' \
 || left(game->map.map, y, x) == ' ' || right(game->map.map, y, x) == ' ')
 		return (0);

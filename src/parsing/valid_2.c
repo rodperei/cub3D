@@ -110,22 +110,6 @@ int	parsing_map_eliminate_new_line(char **ls)
 	return (1);
 }
 
-int	space_map(char **lines)
-{
-	int		y;
-
-	y = -1;
-	while (++y != len_all(lines))
-	{
-		if (contains(lines[y], '\t'))
-		{
-			printf("Error\nMap, invalid caracter (\\t), only space is allowed.");
-			return (0);
-		}
-	}
-	return (1);
-}
-
 int	check_caracter_map(char **lines)
 {
 	int		y;
