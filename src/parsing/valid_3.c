@@ -76,7 +76,7 @@ void	orientation_player(t_entity *player, char c)
 		player->angle = SOUTH_RAD;
 	else if (c == 'E')
 		player->angle = EAST_RAD;
-	else if (c == 'O')
+	else if (c == 'W')
 		player->angle = WEST_RAD;
 }
 
@@ -95,7 +95,7 @@ int	shear_player(t_defs *game)
 		while (map[y] && (size_t)++x != strlen(map[y]))
 		{
 			c = map[y][x];
-			if (c == 'N' || c == 'S' || c == 'E' || c == 'O')
+			if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
 			{
 				map[y][x] = FLOOR;
 				game->player.x = y;
