@@ -57,7 +57,7 @@ int		is_all_space(char *c);
 // utils_matriz.c
 char	**z_maloc_matriz(int size);
 char	**delete_vec_matriz(char **matriz, int index_delete);
-int		count_caracter_matriz(char **mp, char c);
+int		len_mat(char **mp, char c);
 void	free_all(char **matriz);
 void	print_lines(char **matriz);
 

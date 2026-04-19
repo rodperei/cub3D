@@ -44,4 +44,16 @@ int		shear_player(t_defs *game);
 void	load_map(t_defs *game, char **lines);
 void	orientation_player(t_entity *player, char c);
 
+// valid_4.c
+int		is_close_map(char **map);
+char	right(char **map, int y, int x);
+char	left(char **map, int y, int x);
+char	down(char **map, int y, int x);
+char	up(char **map, int y, int x);
+
+// valid_5.c
+int		player_in_map(t_defs *game);
+int		cont_player_in_map(t_defs *game);
+int		valid_caracters(t_defs *game);
+
 #endif

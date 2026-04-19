@@ -119,7 +119,7 @@ int	space_map(char **lines)
 	{
 		if (contains(lines[y], '\t'))
 		{
-			printf("Error\nMap, invalid caracter, only space is allowed.");
+			printf("Error\nMap, invalid caracter (\\t), only space is allowed.");
 			return (0);
 		}
 	}
@@ -140,9 +140,9 @@ int	check_caracter_map(char **lines)
 		{
 			c = lines[y][j];
 			if (c != WALL && c != FLOOR && c != SPACE && c != 'N' \
-&& c != 'S' && c != 'E' && c != 'O' && c != '\n')
+&& c != 'S' && c != 'E' && c != 'W' && c != '\n')
 			{
-				printf("Error\nMap, invalid caracter:%d L:%d C:%d\n", c, y, j);
+				printf("Error\nMap, invalid:%d(%c) L:%d C:%d\n", c, c, y, j);
 				return (0);
 			}
 		}

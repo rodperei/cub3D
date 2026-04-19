@@ -47,11 +47,30 @@ void	valid_map(char *path, t_defs *game)
 		free_all(lines);
 		close_game(game);
 	}
-	print_lines(lines);
 	load_map(game, lines);
+	if (valid_caracters(game) != 1)
+	{
+		printf("Error:\nInvalid characters in the map\n");
+		close_game(game);
+	}
+	if (cont_player_in_map(game) != 1)
+	{
+		printf("Error:\nThere must be exactly one player in the map\n");
+		close_game(game);
+	}
 	if (!shear_player(game))
 	{
 		printf("Error:\nPlayer not found in the map\n");
+		close_game(game);
+	}
+	if (!player_in_map(game))
+	{
+		printf("Error:\nPlayer is not in a valid position\n");
+		close_game(game);
+	}
+	if (!is_close_map(game->map.map))
+	{
+		printf("Error:\nThe map is not closed\n");
 		close_game(game);
 	}
 }

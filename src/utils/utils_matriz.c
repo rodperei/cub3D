@@ -54,7 +54,7 @@ char	**delete_vec_matriz(char **matriz, int index_delete)
 	return (result);
 }
 
-int	count_caracter_matriz(char **mp, char c)
+int	len_mat(char **mp, char c)
 {
 	int	ay;
 	int	ax;
