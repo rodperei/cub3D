@@ -43,6 +43,7 @@ int		len_all(char **str);
 int		equal(char *str, char *str1);
 int		equaln(char *str, char *str1, int size);
 int		contains(char *str, char C);
+int		in_str(char *str, char *C);
 
 // read_file.c
 char	**read_file(int fd);

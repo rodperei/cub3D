@@ -59,15 +59,13 @@ int	main(int argc, char **argv)
 		death("Error:\nUsage: ./cubo3D <map.cub>", 2);
 	init_value_game(&game);
 	parsing(argv[1], &game);
-
-	printf("Player position: x = %f, y = %f, angle = %f\n", game.player.x, game.player.y, game.player.angle);
+	printf("Player position: x = %f, y = %f, angle = %f\n", \
+game.player.x, game.player.y, game.player.angle);
 	printf("Map size: lines = %d, cols = %d\n", game.map.lines, game.map.cols);
 	printf("North texture: %s\n", game.nw_tex.path);
 	printf("South texture: %s\n", game.sw_tex.path);
 	printf("West texture: %s\n", game.ww_tex.path);
 	printf("East texture: %s\n", game.ew_tex.path);
-	
-
 	if (!init_game(&game))
 		return (1);
 	mlx_hook(game.win, 17, 0L, close_game, &game);

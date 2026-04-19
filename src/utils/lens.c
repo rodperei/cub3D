@@ -69,3 +69,24 @@ int	contains(char *str, char C)
 	}
 	return (cant);
 }
+
+int	in_str(char *str, char *C)
+{
+	int	i;
+	int	j;
+
+	if (!str || !C)
+		return (0);
+
+	i = 0;
+	while (str[i])
+	{
+		j = 0;
+		while (C[j] && str[i + j] == C[j])
+			j++;
+		if (C[j] == '\0')
+			return (1);
+		i++;
+	}
+	return (0);
+}
