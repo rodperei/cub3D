@@ -60,10 +60,14 @@ CPPFLAGS	= -MMD -MP -MF $(DEP_DIR)/$*.d
 # ==========================================
 all: .mlx $(NAME)
 
-.mlx:
+.mlx: lib/minilibx-linux
 	@echo "Building mlx..."
 	@$(MAKE) -C ./lib/minilibx-linux/
 	@touch .mlx
+
+lib/minilibx-linux:
+	@echo "Extracting minilibx-linux..."
+	@cd ./lib && tar -xzf minilibx-linux.tgz
 
 $(NAME): $(OBJS)
 	@echo "Linking $(NAME)..."
@@ -85,7 +89,7 @@ clean:
 
 fclean: clean
 	@echo "Cleaning binary..."
-	@$(MAKE) -C ./lib/minilibx-linux/ clean
+	@if [ -d ./lib/minilibx-linux/ ]; then $(MAKE) -C ./lib/minilibx-linux/ clean; fi
 	@rm -rf $(NAME) .mlx
 
 re: fclean all
