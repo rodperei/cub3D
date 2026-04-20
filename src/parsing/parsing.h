@@ -54,5 +54,7 @@ char	up(char **map, int y, int x);
 int		player_in_map(t_defs *game);
 int		cont_player_in_map(t_defs *game);
 int		valid_caracters(t_defs *game);
+int		copy_path(char *dest, char *src);
+int		map_is_last(char *line);
 
 #endif

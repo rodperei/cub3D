@@ -39,7 +39,7 @@ int	parse_color(char *str, int *color)
 	int		i;
 
 	rgb = ft_split(str, ',');
-	if (len_all(rgb) != 3)
+	if (len_all(rgb) != 3 || color[0] != -1 || color[1] != -1 || color[2] != -1)
 	{
 		free_all(rgb);
 		return (0);
@@ -106,23 +106,26 @@ int	parse_path(char **lines, t_defs *def)
 	int		y;
 	char	**line;
 
-	y = 0;
-	while (y <= len_all(lines))
+	y = -1;
+	while (++y < len_all(lines))
 	{
 		line = ft_split_is_space(lines[y]);
 		if (len_all(line) == 2)
 		{
 			if (equal(line[0], "NO"))
-				strcpy(def->nw_tex.path, line[1]);
-			else if (equal(line[0], "SO"))
-				strcpy(def->sw_tex.path, line[1]);
-			else if (equal(line[0], "WE"))
-				strcpy(def->ww_tex.path, line[1]);
-			else if (equal(line[0], "EA"))
-				strcpy(def->ew_tex.path, line[1]);
+				if (!copy_path(def->nw_tex.path, line[1]))
+					return (0);
+			if (equal(line[0], "SO"))
+				if (!copy_path(def->sw_tex.path, line[1]))
+					return (0);
+			if (equal(line[0], "WE"))
+				if (!copy_path(def->ww_tex.path, line[1]))
+					return (0);
+			if (equal(line[0], "EA"))
+				if (!copy_path(def->ew_tex.path, line[1]))
+					return (0);
 		}
 		free_all(line);
-		y++;
 	}
 	return (1);
 }

@@ -82,5 +82,15 @@ void	init_value_game(t_defs *def)
 	def->sw_tex.img.inst = NULL;
 	def->ww_tex.img.inst = NULL;
 	def->ew_tex.img.inst = NULL;
+	def->nw_tex.path[0] = '\0';
+	def->sw_tex.path[0] = '\0';
+	def->ww_tex.path[0] = '\0';
+	def->ew_tex.path[0] = '\0';
+	def->floor_color[0] = -1;
+	def->floor_color[1] = -1;
+	def->floor_color[2] = -1;
+	def->ceiling_color[0] = -1;
+	def->ceiling_color[1] = -1;
+	def->ceiling_color[2] = -1;
 	def->map.map = NULL;
 }

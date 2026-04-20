@@ -62,9 +62,9 @@ char	**clean_file_only_map(char **lines)
 		line = ft_split_is_space(lines[y]);
 		if (len_all(line) == 2)
 		{
-			if (equal(line[0], "NO") || equal(line[0], "F") \
-|| equal(line[0], "SO") || equal(line[0], "C") \
-|| equal(line[0], "WE") || equal(line[0], "EA"))
+			if (in_str(line[0], "NO") || in_str(line[0], "F") \
+|| in_str(line[0], "SO") || in_str(line[0], "C") \
+|| in_str(line[0], "WE") || in_str(line[0], "EA"))
 			{
 				lines = delete_vec_matriz(lines, y);
 				y = -1;

@@ -61,3 +61,24 @@ int	valid_caracters(t_defs *game)
 	}
 	return (1);
 }
+
+int	copy_path(char *dest, char *src)
+{
+	if (dest[0] != '\0')
+		return (0);
+	strcpy(dest, src);
+	return (1);
+}
+
+int	map_is_last(char *line)
+{
+	int	x;
+
+	x = strlen(line) - 1;
+	if (line[x] == '1' || line[x] == '0' || line[x] == ' ' || line[x] == 'N' \
+|| line[x] == 'S' || line[x] == 'E' || line[x] == 'W')
+		return (1);
+	if (x > 1 && line[x - 1] != '\n' && line[x] == '\n')
+		return (1);
+	return (0);
+}

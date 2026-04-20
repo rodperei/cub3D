@@ -25,8 +25,16 @@ void	valid_params(char *path, t_defs *game)
 	lines = read_file(open(path, O_RDONLY));
 	if (!lines)
 		death("Error\nFailed to read file", 1);
-	parse_path(lines, game);
-	parse_color_line(lines, game);
+	if (!parse_path(lines, game))
+	{
+		free_all(lines);
+		death("Error\nInvalid texture path format", 1);
+	}
+	if (!parse_color_line(lines, game))
+	{
+		free_all(lines);
+		death("Error\nInvalid color format", 1);
+	}
 	free_all(lines);
 	check_path(game);
 	game->mlx = mlx_init();
@@ -39,6 +47,12 @@ void	valid_map_1(char *path, t_defs *game)
 	char	*line;
 
 	line = read_file_line(open(path, O_RDONLY));
+	if (!map_is_last(line))
+	{
+		free(line);
+		printf("Error\nMap must be the last element in the file\n");
+		close_game(game);
+	}
 	lines = ft_split_not_replace(line, '\n');
 	free(line);
 	lines = clean_file_only_map(lines);

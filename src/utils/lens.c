@@ -77,7 +77,6 @@ int	in_str(char *str, char *C)
 
 	if (!str || !C)
 		return (0);
-
 	i = 0;
 	while (str[i])
 	{
