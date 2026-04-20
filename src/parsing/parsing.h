@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                             :+:      :+:    :+:   */
+/*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frnicola <frnicola@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -20,10 +20,10 @@
 # define FLOOR '0'
 # define SPACE ' '
 
-# define NORT_RAD PI / 2
-# define SOUTH_RAD (3 * PI) / 2
-# define EAST_RAD PI 
-# define WEST_RAD 0
+# define NORT_RAD 1.570
+# define SOUTH_RAD 4.710
+# define EAST_RAD 3.140
+# define WEST_RAD 0.0
 
 // valid_1.c
 int		check_ext(char *path);

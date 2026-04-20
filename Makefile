@@ -74,7 +74,7 @@ $(NAME): $(OBJS)
 	@$(CC) $(OBJS) -o $(NAME) $(LDFLAGS)
 	@echo "Build successful!"
 
-$(OBJ_DIR)/%.o: %.c
+$(OBJ_DIR)/%.o: %.c .mlx
 	@mkdir -p $(dir $@)
 	@mkdir -p $(dir $(DEP_DIR)/$*)
 	@echo "Compiling $<..."
@@ -88,8 +88,10 @@ clean:
 	@rm -rf $(BUILD_DIR)
 
 fclean: clean
-	@echo "Cleaning binary..."
-	@if [ -d ./lib/minilibx-linux/ ]; then $(MAKE) -C ./lib/minilibx-linux/ clean; fi
+	@echo "Cleaning minilibx..."
+	@-$(MAKE) -C ./lib/minilibx-linux/ clean 2>/dev/null || true
+	@echo "Removing library and binary..."
+	@rm -rf ./lib/minilibx-linux/
 	@rm -rf $(NAME) .mlx
 
 re: fclean all
