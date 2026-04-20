@@ -35,6 +35,10 @@ Always at the very end of the file, there must be a map. The map must be compose
 ## Resources
 * [Lode's Computer Graphics Tutorial (Raycasting)](https://lodev.org/cgtutor/raycasting.html)
 * [Interactive DDA Algorithm](https://aaaa.sh/creatures/dda-algorithm-interactive/) 
-* [Bresenham's Line Algorithm](https://www.cs.helsinki.fi/group/goa/mallinnus/lines/bresenh.html) 
+* [Bresenham's Line Algorithm](https://www.cs.helsinki.fi/group/goa/mallinnus/lines/bresenh.html)
+* [MinilibX Documentation](https://harm-smits.github.io/42docs/libs/minilibx)
 
-*AI was used to proofread this README file.*
+### AI Usage
+AI was used to assist with the following tasks:
+* **Map generation:** Creating aesthetically pleasing test maps and XPM textures (`maps/lab.cub` and associated texture files) with themed color palettes.
+* **Documentation:** Proofreading and structuring this README file for clarity and completeness.
