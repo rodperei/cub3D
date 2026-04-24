@@ -82,19 +82,14 @@ int	parse_color_line(char **lines, t_defs *def)
 		line = ft_split_is_space(lines[y]);
 		if (len_all(line) == 2)
 		{
+			if (contains(lines[y], ',') != 2 && (equal(line[0], "F") \
+|| equal(line[0], "C")))
+				exit_color(lines, line);
 			if (equal(line[0], "F") && !parse_color(line[1], def->floor_color))
-			{
-				free_all(lines);
-				free_all(line);
-				death("Error\nInvalid floor color format", 1);
-			}
+				exit_color(lines, line);
 			if (equal(line[0], "C") \
 && !parse_color(line[1], def->ceiling_color))
-			{
-				free_all(lines);
-				free_all(line);
-				death("Error\nInvalid ceiling color format", 1);
-			}
+				exit_color(lines, line);
 		}
 		free_all(line);
 	}

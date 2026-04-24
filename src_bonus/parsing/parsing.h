@@ -37,6 +37,7 @@ void	load_images(t_defs *def);
 char	**clean_file_only_map(char **lines);
 int		parsing_map_eliminate_new_line(char **l);
 int		check_caracter_map(char **lines);
+int		parse_path_key(char *key, char *value, t_defs *def);
 
 // valid_3.c
 int		shear_player(t_defs *game);
@@ -56,5 +57,8 @@ int		cont_player_in_map(t_defs *game);
 int		valid_caracters(t_defs *game);
 int		copy_path(char *dest, char *src);
 int		map_is_last(char *line);
+
+// valid_6.c
+void	exit_color(char **lines, char **line);
 
 #endif

@@ -47,6 +47,7 @@ SRCS		:=	$(SRC_DIR)/initialization.c \
 				$(SRC_DIR)/parsing/valid_3.c \
 				$(SRC_DIR)/parsing/valid_4.c \
 				$(SRC_DIR)/parsing/valid_5.c \
+				$(SRC_DIR)/parsing/valid_6.c \
 				$(SRC_DIR)/parsing/parsing.c \
 				./main.c
 
@@ -76,6 +77,7 @@ SRCS_BONUS	:=	$(SRC_DIR_BONUS)/initialization_bonus.c \
 				$(SRC_DIR_BONUS)/parsing/valid_3_bonus.c \
 				$(SRC_DIR_BONUS)/parsing/valid_4_bonus.c \
 				$(SRC_DIR_BONUS)/parsing/valid_5_bonus.c \
+				$(SRC_DIR_BONUS)/parsing/valid_6_bonus.c \
 				$(SRC_DIR_BONUS)/parsing/parsing_bonus.c \
 				./main_bonus.c
 

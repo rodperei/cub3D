@@ -58,4 +58,7 @@ int		valid_caracters(t_defs *game);
 int		copy_path(char *dest, char *src);
 int		map_is_last(char *line);
 
+// valid_6.c
+void	exit_color(char **lines, char **line);
+
 #endif
