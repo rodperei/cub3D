@@ -37,6 +37,7 @@ void	load_images(t_defs *def);
 char	**clean_file_only_map(char **lines);
 int		parsing_map_eliminate_new_line(char **l);
 int		check_caracter_map(char **lines);
+int		parse_path_key(char *key, char *value, t_defs *def);
 
 // valid_3.c
 int		shear_player(t_defs *game);

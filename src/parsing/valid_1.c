@@ -104,28 +104,19 @@ int	parse_color_line(char **lines, t_defs *def)
 int	parse_path(char **lines, t_defs *def)
 {
 	int		y;
+	int		ok;
 	char	**line;
 
+	ok = 1;
+	line = NULL;
 	y = -1;
-	while (++y < len_all(lines))
+	while (++y < len_all(lines) && ok)
 	{
 		line = ft_split_is_space(lines[y]);
 		if (len_all(line) == 2)
-		{
-			if (equal(line[0], "NO"))
-				if (!copy_path(def->nw_tex.path, line[1]))
-					return (0);
-			if (equal(line[0], "SO"))
-				if (!copy_path(def->sw_tex.path, line[1]))
-					return (0);
-			if (equal(line[0], "WE"))
-				if (!copy_path(def->ww_tex.path, line[1]))
-					return (0);
-			if (equal(line[0], "EA"))
-				if (!copy_path(def->ew_tex.path, line[1]))
-					return (0);
-		}
+			ok = parse_path_key(line[0], line[1], def);
 		free_all(line);
+		line = NULL;
 	}
-	return (1);
+	return (ok);
 }

@@ -133,3 +133,16 @@ int	check_caracter_map(char **lines)
 	}
 	return (1);
 }
+
+int	parse_path_key(char *key, char *value, t_defs *def)
+{
+	if (equal(key, "NO"))
+		return (copy_path(def->nw_tex.path, value));
+	if (equal(key, "SO"))
+		return (copy_path(def->sw_tex.path, value));
+	if (equal(key, "WE"))
+		return (copy_path(def->ww_tex.path, value));
+	if (equal(key, "EA"))
+		return (copy_path(def->ew_tex.path, value));
+	return (1);
+}
